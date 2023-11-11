@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
-                ) {
+                ){
                     var email by remember { mutableStateOf("") }
                     var password by remember { mutableStateOf("") }
                     val loginFlow = loginViewModel.loginFlow.collectAsState()
