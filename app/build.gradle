@@ -49,6 +49,17 @@ android {
 }
 
 dependencies {
+
+    // To use constraintlayout in compose
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha13"
+
+    //Icons
+    implementation("androidx.compose.material:material-icons-extended:1.5.3")
+
+    //Window Size
+    implementation "androidx.compose.material3:material3-window-size-class"
+
+
     //Firebase
     implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
     implementation 'com.google.android.gms:play-services-auth:20.4.1'
@@ -64,10 +75,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.0-alpha01"
 
     //retrofit
-   // implementation "com.squareup.retrofit2:retrofit:$retrofit"
-    //moshi
-    //implementation "com.squareup.moshi:moshi-kotlin:$moshi"
-    //implementation "com.squareup.retrofit2:converter-moshi:$retrofit"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
 
     //dagger hilt
     implementation "com.google.dagger:hilt-android:2.44"

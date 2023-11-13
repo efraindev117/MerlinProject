@@ -1,9 +1,9 @@
-package com.example.merlinproject.ui
+package com.example.merlinproject.ui.features.auth.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.merlinproject.data.Resource
-import com.example.merlinproject.domain.IFirebaseAuthRepository
+import com.example.merlinproject.domain.repository.IFirebaseAuthRepository
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,4 +1,4 @@
-package com.example.merlinproject.domain
+package com.example.merlinproject.domain.repository
 
 import com.example.merlinproject.data.Resource
 import com.google.firebase.auth.FirebaseUser

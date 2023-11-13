@@ -1,6 +1,7 @@
-package com.example.merlinproject.data
+package com.example.merlinproject.data.di
 
-import com.example.merlinproject.domain.IFirebaseAuthRepository
+import com.example.merlinproject.data.repository.FirebaseAuthRepositoryImp
+import com.example.merlinproject.domain.repository.IFirebaseAuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides

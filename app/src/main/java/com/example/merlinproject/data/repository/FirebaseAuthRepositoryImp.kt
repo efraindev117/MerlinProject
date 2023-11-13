@@ -1,6 +1,8 @@
-package com.example.merlinproject.data
+package com.example.merlinproject.data.repository
 
-import com.example.merlinproject.domain.IFirebaseAuthRepository
+import com.example.merlinproject.data.Resource
+import com.example.merlinproject.data.firebaseAwait
+import com.example.merlinproject.domain.repository.IFirebaseAuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
