@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material3.Button
@@ -33,9 +34,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.merlinproject.R
 import com.example.merlinproject.ui.navigation.ScreensNavigation
@@ -49,7 +52,8 @@ import com.example.merlinproject.ui.theme.MerlinProjectIcons.visibilityFilled
 @Composable
 fun LoginScreen(
     navHostController: NavHostController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    mviewModel: LoginViewModel = hiltViewModel()
 ) {
     Scaffold(
         modifier = modifier,
@@ -89,6 +93,7 @@ fun ScreenContent(
         val middleGuideline = createGuidelineFromTop(.2f)
         val bottomGuideline = createGuidelineFromBottom(.2f)
         val context = LocalContext.current
+        //Entry Text
         var email by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
         var loading by remember { mutableStateOf(false) }
@@ -101,6 +106,7 @@ fun ScreenContent(
             leadingIcon = { Icon(imageVector = emailOutlined, contentDescription = null) },
             trailingIcon = { Icon(imageVector = cancelFilled, contentDescription = null) },
             onValueChange = { email = it },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             modifier = Modifier.constrainAs(textFieldEmailAndPassword) {
                 top.linkTo(middleGuideline)
                 start.linkTo(parent.start)
@@ -113,6 +119,7 @@ fun ScreenContent(
             value = password,
             supportingText = { Text(text = "Contraseña", color = Color.Black) },
             label = { Text(text = "password", color = Color.Black) },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             placeholder = { Text(text = "") },
             leadingIcon = { Icon(imageVector = passwordOutlined, contentDescription = null) },
             trailingIcon = { Icon(imageVector = visibilityFilled, contentDescription = null) },

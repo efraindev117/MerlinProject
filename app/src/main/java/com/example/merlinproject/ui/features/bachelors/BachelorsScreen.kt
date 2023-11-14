@@ -73,7 +73,7 @@ fun ScreenBachelorsContent(modifier: Modifier, paddingValues: PaddingValues) {
         )
 
         Text(
-            text = "Plantel de inscripción",
+            text = "Completa tu Información",
             style = MaterialTheme.typography.bodyMedium,
             modifier = modifier
                 .padding(start = 8.dp)

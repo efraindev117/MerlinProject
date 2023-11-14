@@ -1,5 +1,6 @@
 package com.example.merlinproject.ui.features.auth.login
 
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextField
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 fun TextFieldMerlin(
     modifier: Modifier = Modifier,
     value: String,
+    keyboardOptions: KeyboardOptions,
     supportingText: (@Composable () -> Unit),
     label: (@Composable () -> Unit),
     placeholder: (@Composable () -> Unit),
@@ -33,10 +35,12 @@ fun TextFieldMerlin(
         supportingText = { supportingText() },
         onValueChange = { onValueChange("") },
         label = { label() },
+        keyboardOptions = keyboardOptions,
         shape = MaterialTheme.shapes.extraSmall,
         leadingIcon = { leadingIcon() },
         trailingIcon = {
             trailingIcon()
-        }
+        },
+
     )
 }
