@@ -76,7 +76,6 @@ fun ScreenRegisterContent(
             textFieldPassword,
             buttonLogin,
             txtSocialNetwork,
-            btnTextRegister,
             btnGoogleSignIn) = createRefs()
         val middleGuideline = createGuidelineFromTop(.2f)
         val bottomGuideline = createGuidelineFromBottom(.3f)
