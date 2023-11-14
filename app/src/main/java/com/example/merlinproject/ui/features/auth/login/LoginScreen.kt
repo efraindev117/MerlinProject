@@ -1,16 +1,13 @@
 package com.example.merlinproject.ui.features.auth.login
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -30,23 +27,31 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.merlinproject.R
+import com.example.merlinproject.data.Resource
 import com.example.merlinproject.ui.navigation.ScreensNavigation
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.cancelFilled
+import com.example.merlinproject.ui.theme.MerlinProjectIcons.checkIconError
+import com.example.merlinproject.ui.theme.MerlinProjectIcons.checkIconOk
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.emailOutlined
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.navigateToBack
+import com.example.merlinproject.ui.theme.MerlinProjectIcons.passwordFilled
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.passwordOutlined
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.visibilityFilled
+import com.example.merlinproject.ui.theme.MerlinProjectIcons.visibilityOffFilled
+import com.example.merlinproject.ui.utils.composables.MerlinCircleProgressBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -68,17 +73,18 @@ fun LoginScreen(
             )
         }
     ) { innerPadding ->
-        ScreenContent(modifier, innerPadding, navHostController)
+        ScreenContent(modifier, innerPadding, navHostController, mviewModel)
     }
 }
-
 
 @Composable
 fun ScreenContent(
     modifier: Modifier,
     innerPadding: PaddingValues,
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    mviewModel: LoginViewModel
 ) {
+    // val loginFlow = mviewModel.loginFlow.collectAsState()
     ConstraintLayout(
         modifier = modifier
             .fillMaxSize()
@@ -88,42 +94,96 @@ fun ScreenContent(
             textFieldPassword,
             buttonLogin,
             txtSocialNetwork,
+            progressBarIndicator,
             btnTextRegister,
             btnGoogleSignIn) = createRefs()
         val middleGuideline = createGuidelineFromTop(.2f)
         val bottomGuideline = createGuidelineFromBottom(.2f)
         val context = LocalContext.current
-        //Entry Text
+        //Email and Password
         var email by remember { mutableStateOf("") }
+        //Password
         var password by remember { mutableStateOf("") }
+        var passwordVisibility by remember { mutableStateOf(false) }
+        var isErrorState by remember { mutableStateOf(true) }
         var loading by remember { mutableStateOf(false) }
 
+
         TextFieldMerlin(
-            value = email,
-            supportingText = { Text(text = "Correo electronico") },
-            label = { Text(text = "Email", color = Color.Black) },
-            placeholder = { Text(text = "Texto de placeHolder") },
+            value = mviewModel.email.value.trim(),
+            supportingText = {
+                if (mviewModel.email.value.isNotEmpty()) {
+                    val message = if (mviewModel.isEmailValid.value) {
+                        mviewModel.emailMsgResult.value
+                    } else {
+                        mviewModel.emailMsgResult.value
+                    }
+                    Text(text = message)
+                } else {
+                    Text(text = "Correo electronico")
+                }
+            },
+            label = { Text(text = "Email") },
+            placeholder = { Text(text = "Email") },
             leadingIcon = { Icon(imageVector = emailOutlined, contentDescription = null) },
-            trailingIcon = { Icon(imageVector = cancelFilled, contentDescription = null) },
-            onValueChange = { email = it },
+            trailingIcon = {
+                val icon = if (passwordVisibility) {
+                    cancelFilled
+                } else {
+                    cancelFilled
+                }
+                IconButton(
+                    onClick = { mviewModel.email.value = "" },
+                    enabled = mviewModel.email.value.isNotEmpty()
+                ) {
+                    Icon(imageVector = icon, contentDescription = null)
+                }
+            },
+            onValueChange = { mviewModel.email.value = it },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            validateField = { mviewModel.validateEmail() },
+            visualTransformation = VisualTransformation.None,
             modifier = Modifier.constrainAs(textFieldEmailAndPassword) {
                 top.linkTo(middleGuideline)
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
             }
-        ) {
-
-        }
+        )
         TextFieldMerlin(
-            value = password,
-            supportingText = { Text(text = "Contraseña", color = Color.Black) },
-            label = { Text(text = "password", color = Color.Black) },
+            value = mviewModel.password.value.trim(),
+            supportingText = {
+                if (mviewModel.password.value.isNotEmpty()) {
+                    val message = if (mviewModel.isPasswordValid.value) {
+                        mviewModel.passwordMsgResult.value
+                    } else {
+                        mviewModel.passwordMsgResult.value
+                    }
+                    Text(text = message)
+                } else {
+                    Text(text = "Contraseña")
+                }
+            },
+            label = { Text(text = "password") },
+            isError = mviewModel.isPasswordValid.value,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             placeholder = { Text(text = "") },
-            leadingIcon = { Icon(imageVector = passwordOutlined, contentDescription = null) },
-            trailingIcon = { Icon(imageVector = visibilityFilled, contentDescription = null) },
-            onValueChange = { password = it },
+            leadingIcon = { Icon(imageVector = passwordFilled, contentDescription = null) },
+            trailingIcon = {
+                val icon = if (passwordVisibility) {
+                    visibilityFilled
+                } else {
+                    visibilityOffFilled
+                }
+                IconButton(
+                    onClick = { passwordVisibility = !passwordVisibility },
+                    enabled = mviewModel.password.value.isNotEmpty()
+                ) {
+                    Icon(imageVector = icon, contentDescription = null)
+                }
+            },
+            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+            onValueChange = { mviewModel.password.value = it },
+            validateField = { mviewModel.validatePassword() },
             modifier = Modifier
                 .padding(top = 32.dp)
                 .constrainAs(textFieldPassword) {
@@ -131,16 +191,17 @@ fun ScreenContent(
                     end.linkTo(parent.end)
                     top.linkTo(textFieldEmailAndPassword.bottom)
                 }
-        ) {
+        )
 
-        }
+        //Boton para mandar la peticion
         Button(
-            onClick = { navHostController.navigate(ScreensNavigation.BachelorsScreen.route)},
+            onClick = { mviewModel.login(email, password) },
             shape = MaterialTheme.shapes.extraSmall,
             colors = ButtonDefaults.buttonColors(
                 contentColor = Color.White,
                 containerColor = Color.Black
             ),
+            enabled = mviewModel.isEmailValid.value && mviewModel.isPasswordValid.value,
             modifier = Modifier
                 .padding(top = 32.dp)
                 .width(220.dp)
@@ -201,6 +262,33 @@ fun ScreenContent(
                 textDecoration = TextDecoration.Underline
             )
         }
+
+        /* loginFlow.value?.let {
+             when (it) {
+                 is Resource.Failure -> {
+                     // TODO: con este vamos a probar la peticion a firebase
+                     Toast.makeText(context, "Peticion correcta $it", Toast.LENGTH_SHORT).show()
+                 }
+
+                 Resource.Loading -> {
+                     MerlinCircleProgressBar(
+                         modifier = modifier.constrainAs(progressBarIndicator) {
+                             top.linkTo(parent.top)
+                             start.linkTo(parent.start)
+                             end.linkTo(parent.end)
+                         }
+                     )
+                 }
+
+                 is Resource.Success -> {
+                     // TODO: Que hacer en caso de un success
+                 }
+
+                 else -> {
+                     Toast.makeText(context, "Error desconocido", Toast.LENGTH_SHORT).show()
+                 }
+             }
+         }*/
 
     }
 }

@@ -16,7 +16,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,17 +26,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.merlinproject.R
 import com.example.merlinproject.ui.features.auth.login.LoginViewModel
-import com.example.merlinproject.ui.features.auth.login.ScreenContent
 import com.example.merlinproject.ui.features.auth.login.TextFieldMerlin
 import com.example.merlinproject.ui.navigation.ScreensNavigation
 import com.example.merlinproject.ui.theme.MerlinProjectIcons
@@ -47,7 +44,8 @@ import com.example.merlinproject.ui.theme.MerlinProjectIcons
 fun RegisterScreen(
     navHostController: NavHostController,
     modifier: Modifier = Modifier,
-    mViewModel: LoginViewModel = hiltViewModel() ) {
+    mViewModel: LoginViewModel = hiltViewModel()
+) {
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -64,7 +62,7 @@ fun RegisterScreen(
             )
         }
     ) { innerPadding ->
-        ScreenRegisterContent(modifier, innerPadding, mViewModel ,navHostController)
+        ScreenRegisterContent(modifier, innerPadding, mViewModel, navHostController)
     }
 }
 
@@ -97,27 +95,49 @@ fun ScreenRegisterContent(
             supportingText = { Text(text = "Correo electronico") },
             label = { Text(text = "Email", color = Color.Black) },
             placeholder = { Text(text = "Texto de placeHolder") },
-            leadingIcon = { Icon(imageVector = MerlinProjectIcons.emailOutlined, contentDescription = null) },
-            trailingIcon = { Icon(imageVector = MerlinProjectIcons.cancelFilled, contentDescription = null) },
+            leadingIcon = {
+                Icon(
+                    imageVector = MerlinProjectIcons.emailOutlined,
+                    contentDescription = null
+                )
+            },
+            trailingIcon = {
+                Icon(
+                    imageVector = MerlinProjectIcons.cancelFilled,
+                    contentDescription = null
+                )
+            },
+            isError = true,
             onValueChange = { mViewModel.email.value = it },
+            visualTransformation = VisualTransformation.None,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             modifier = Modifier.constrainAs(textFieldEmailAndPassword) {
                 top.linkTo(middleGuideline)
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
             }
-        ) {
-
-        }
+        )
         TextFieldMerlin(
             value = mViewModel.password.value,
             supportingText = { Text(text = "Contraseña", color = Color.Black) },
             label = { Text(text = "password", color = Color.Black) },
             placeholder = { Text(text = "") },
+            visualTransformation = VisualTransformation.None,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            leadingIcon = { Icon(imageVector = MerlinProjectIcons.passwordOutlined, contentDescription = null) },
-            trailingIcon = { Icon(imageVector = MerlinProjectIcons.visibilityFilled, contentDescription = null) },
+            leadingIcon = {
+                Icon(
+                    imageVector = MerlinProjectIcons.passwordOutlined,
+                    contentDescription = null
+                )
+            },
+            trailingIcon = {
+                Icon(
+                    imageVector = MerlinProjectIcons.visibilityFilled,
+                    contentDescription = null
+                )
+            },
             onValueChange = { mViewModel.password.value = it },
+            isError = false,
             modifier = Modifier
                 .padding(top = 32.dp)
                 .constrainAs(textFieldPassword) {
@@ -125,11 +145,9 @@ fun ScreenRegisterContent(
                     end.linkTo(parent.end)
                     top.linkTo(textFieldEmailAndPassword.bottom)
                 }
-        ) {
-
-        }
+        )
         Button(
-            onClick = { navHostController.navigate(ScreensNavigation.BachelorsScreen.route)},
+            onClick = { navHostController.navigate(ScreensNavigation.BachelorsScreen.route) },
             shape = MaterialTheme.shapes.extraSmall,
             colors = ButtonDefaults.buttonColors(
                 contentColor = Color.White,

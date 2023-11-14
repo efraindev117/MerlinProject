@@ -19,18 +19,19 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(private val repository: IFirebaseAuthRepository) :
     ViewModel() {
 
+    //Email setup
     var email: MutableState<String> = mutableStateOf("")
     var isEmailValid: MutableState<Boolean> = mutableStateOf(false)
-    var emailErrMsg: MutableState<String> = mutableStateOf("")
+    var emailMsgResult: MutableState<String> = mutableStateOf("")
 
-
+    //Password setup
     var password: MutableState<String> = mutableStateOf("")
     var isPasswordValid: MutableState<Boolean> = mutableStateOf(false)
-    var passwordErrMsg: MutableState<String> = mutableStateOf("")
+    var passwordMsgResult: MutableState<String> = mutableStateOf("")
+
 
     private val _loginFlow = MutableStateFlow<Resource<FirebaseUser>?>(null)
     val loginFlow: StateFlow<Resource<FirebaseUser>?> = _loginFlow
-
     private val _signUpFlow = MutableStateFlow<Resource<FirebaseUser>?>(null)
     val signUpFlow: StateFlow<Resource<FirebaseUser>?> = _signUpFlow
 
@@ -43,12 +44,29 @@ class LoginViewModel @Inject constructor(private val repository: IFirebaseAuthRe
         }
     }
 
-    fun validateEmail(){
-        //Email_valido
-        if (Patterns.EMAIL_ADDRESS.matcher(email.value).matches()){
-
+    fun validateEmail() {
+        //saber si el Email valido
+        if (Patterns.EMAIL_ADDRESS.matcher(email.value).matches()) {
+            //Accedemos al valor
+            isEmailValid.value = true
+            emailMsgResult.value = "El correo es válido.♥ "
+        } else {
+            //Accedemos al valor
+            isEmailValid.value = false
+            emailMsgResult.value = "El correo no es válido."
         }
     }
+
+    fun validatePassword() {
+        if (password.value.length >= 6) {
+            isPasswordValid.value = true
+            passwordMsgResult.value = "Formato correcto."
+        } else {
+            isPasswordValid.value = false
+            passwordMsgResult.value = "Introduce almenos 6 carácteres."
+        }
+    }
+
 
     fun login(email: String, password: String) = viewModelScope.launch {
         _loginFlow.value = Resource.Loading
@@ -56,7 +74,7 @@ class LoginViewModel @Inject constructor(private val repository: IFirebaseAuthRe
         _loginFlow.value = result
     }
 
-    fun SignUp(name: String, email: String, password: String) = viewModelScope.launch {
+    fun signUp(name: String, email: String, password: String) = viewModelScope.launch {
         _signUpFlow.value = Resource.Loading
         val result = repository.signUp(name, email, password)
         _signUpFlow.value = result

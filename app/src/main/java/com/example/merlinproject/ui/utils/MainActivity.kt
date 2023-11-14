@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.merlinproject.ui.features.auth.login.LoginScreen
 import com.example.merlinproject.ui.features.auth.login.LoginViewModel
 import com.example.merlinproject.ui.navigation.NestedNavigation
 import com.example.merlinproject.ui.theme.MerlinProjectTheme
@@ -20,8 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-    private val loginViewModel by viewModels<LoginViewModel>()
     private lateinit var navController: NavHostController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +33,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     navController = rememberNavController()
-                    //LoginScreen(navController, viewModel)
-                    NestedNavigation(navController = navController)
+                   // NestedNavigation(navController = navController)
+                    LoginScreen(navHostController = navController )
                 }
 
             }

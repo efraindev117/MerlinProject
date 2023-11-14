@@ -4,10 +4,12 @@ import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Cancel
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.ChecklistRtl
 import androidx.compose.material.icons.filled.ContactSupport
 import androidx.compose.material.icons.filled.DomainAdd
 import androidx.compose.material.icons.filled.EmojiEvents
+import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Key
@@ -70,4 +72,6 @@ object MerlinProjectIcons {
     val universityIcon = Icons.Outlined.DomainAdd
     val academyIcon = Icons.Filled.School
     val favoriteIcon = Icons.Filled.Favorite
+    val checkIconOk = Icons.Filled.CheckCircle
+    val checkIconError = Icons.Filled.Error
 }
