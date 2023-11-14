@@ -1,5 +1,8 @@
 package com.example.merlinproject.ui.features.auth.login
 
+import android.util.Patterns
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.merlinproject.data.Resource
@@ -9,11 +12,21 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val repository: IFirebaseAuthRepository) :
     ViewModel() {
+
+    var email: MutableState<String> = mutableStateOf("")
+    var isEmailValid: MutableState<Boolean> = mutableStateOf(false)
+    var emailErrMsg: MutableState<String> = mutableStateOf("")
+
+
+    var password: MutableState<String> = mutableStateOf("")
+    var isPasswordValid: MutableState<Boolean> = mutableStateOf(false)
+    var passwordErrMsg: MutableState<String> = mutableStateOf("")
 
     private val _loginFlow = MutableStateFlow<Resource<FirebaseUser>?>(null)
     val loginFlow: StateFlow<Resource<FirebaseUser>?> = _loginFlow
@@ -27,6 +40,13 @@ class LoginViewModel @Inject constructor(private val repository: IFirebaseAuthRe
     init {
         if (repository.currentUser != null) {
             _loginFlow.value = Resource.Success(repository.currentUser!!)
+        }
+    }
+
+    fun validateEmail(){
+        //Email_valido
+        if (Patterns.EMAIL_ADDRESS.matcher(email.value).matches()){
+
         }
     }
 

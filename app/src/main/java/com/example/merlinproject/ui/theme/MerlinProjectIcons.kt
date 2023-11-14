@@ -67,7 +67,7 @@ object MerlinProjectIcons {
     // TODO: gravel icon terminos y condiciones.
     val navigateToBack = Icons.Filled.ArrowBackIosNew
     val assitOutlined = Icons.Outlined.Info
-    val universityIcon = Icons.Filled.DomainAdd
+    val universityIcon = Icons.Outlined.DomainAdd
     val academyIcon = Icons.Filled.School
     val favoriteIcon = Icons.Filled.Favorite
 }
