@@ -27,6 +27,7 @@ import androidx.compose.material.icons.outlined.ChecklistRtl
 import androidx.compose.material.icons.outlined.ContactSupport
 import androidx.compose.material.icons.outlined.DomainAdd
 import androidx.compose.material.icons.outlined.EmojiEvents
+import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Key
@@ -74,4 +75,5 @@ object MerlinProjectIcons {
     val favoriteIcon = Icons.Filled.Favorite
     val checkIconOk = Icons.Filled.CheckCircle
     val checkIconError = Icons.Filled.Error
+    val usernameIcon = Icons.Outlined.Face
 }

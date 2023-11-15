@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.merlinproject.data.Resource
 import com.example.merlinproject.domain.repository.IFirebaseAuthRepository
+import com.google.android.gms.common.api.Response
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +17,7 @@ import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val repository: IFirebaseAuthRepository) :
+class LoginViewModel @Inject constructor(private val autUsesCase: IFirebaseAuthRepository) :
     ViewModel() {
 
     //Email setup
@@ -29,20 +30,29 @@ class LoginViewModel @Inject constructor(private val repository: IFirebaseAuthRe
     var isPasswordValid: MutableState<Boolean> = mutableStateOf(false)
     var passwordMsgResult: MutableState<String> = mutableStateOf("")
 
-
+    //Login
     private val _loginFlow = MutableStateFlow<Resource<FirebaseUser>?>(null)
     val loginFlow: StateFlow<Resource<FirebaseUser>?> = _loginFlow
+
+    //Register
     private val _signUpFlow = MutableStateFlow<Resource<FirebaseUser>?>(null)
     val signUpFlow: StateFlow<Resource<FirebaseUser>?> = _signUpFlow
 
-    val currentUser: FirebaseUser?
-        get() = repository.currentUser
+    /*   val currentUser: FirebaseUser?
+           get() = repository.currentUser
 
-    init {
-        if (repository.currentUser != null) {
-            _loginFlow.value = Resource.Success(repository.currentUser!!)
-        }
+       init {
+           if (repository.currentUser != null) {
+               _loginFlow.value = Resource.Success(repository.currentUser!!)
+           }
+       }*/
+
+    fun login() = viewModelScope.launch {
+        _loginFlow.value = Resource.Loading
+        val result = autUsesCase.login(email.value, password.value)
+        _loginFlow.value = result
     }
+
 
     fun validateEmail() {
         //saber si el Email valido
@@ -67,22 +77,27 @@ class LoginViewModel @Inject constructor(private val repository: IFirebaseAuthRe
         }
     }
 
+    /*   fun login(email: String, password: String) = viewModelScope.launch {
+           _loginFlow.value = Resource.Loading
+           val result = repository.login(email, password)
+           _loginFlow.value = result
+       }
 
-    fun login(email: String, password: String) = viewModelScope.launch {
+        fun login() = viewModelScope.launch {
         _loginFlow.value = Resource.Loading
-        val result = repository.login(email, password)
+        val result = autUsesCase.login(email.value, password.value)
         _loginFlow.value = result
     }
 
-    fun signUp(name: String, email: String, password: String) = viewModelScope.launch {
-        _signUpFlow.value = Resource.Loading
-        val result = repository.signUp(name, email, password)
-        _signUpFlow.value = result
-    }
+       fun signUp(name: String, email: String, password: String) = viewModelScope.launch {
+           _signUpFlow.value = Resource.Loading
+           val result = repository.signUp(name, email, password)
+           _signUpFlow.value = result
+       }
 
-    fun logout() {
-        repository.logout()
-        _loginFlow.value = null
-        _signUpFlow.value = null
-    }
+       fun logout() {
+           repository.logout()
+           _loginFlow.value = null
+           _signUpFlow.value = null
+       }*/
 }

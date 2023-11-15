@@ -20,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -84,7 +85,7 @@ fun ScreenContent(
     navHostController: NavHostController,
     mviewModel: LoginViewModel
 ) {
-    // val loginFlow = mviewModel.loginFlow.collectAsState()
+    val loginFlow = mviewModel.loginFlow.collectAsState()
     ConstraintLayout(
         modifier = modifier
             .fillMaxSize()
@@ -98,15 +99,14 @@ fun ScreenContent(
             btnTextRegister,
             btnGoogleSignIn) = createRefs()
         val middleGuideline = createGuidelineFromTop(.2f)
-        val bottomGuideline = createGuidelineFromBottom(.2f)
         val context = LocalContext.current
         //Email and Password
-        var email by remember { mutableStateOf("") }
+        // var email by remember { mutableStateOf("") }
         //Password
-        var password by remember { mutableStateOf("") }
+        // var password by remember { mutableStateOf("") }
         var passwordVisibility by remember { mutableStateOf(false) }
-        var isErrorState by remember { mutableStateOf(true) }
-        var loading by remember { mutableStateOf(false) }
+        //var isErrorState by remember { mutableStateOf(true) }
+        //var loading by remember { mutableStateOf(false) }
 
 
         TextFieldMerlin(
@@ -195,7 +195,7 @@ fun ScreenContent(
 
         //Boton para mandar la peticion
         Button(
-            onClick = { mviewModel.login(email, password) },
+            onClick = { mviewModel.login() },
             shape = MaterialTheme.shapes.extraSmall,
             colors = ButtonDefaults.buttonColors(
                 contentColor = Color.White,
@@ -263,33 +263,32 @@ fun ScreenContent(
             )
         }
 
-        /* loginFlow.value?.let {
-             when (it) {
-                 is Resource.Failure -> {
-                     // TODO: con este vamos a probar la peticion a firebase
-                     Toast.makeText(context, "Peticion correcta $it", Toast.LENGTH_SHORT).show()
-                 }
+        loginFlow.value?.let {
+            when (it) {
+                is Resource.Failure -> {
+                    // TODO: con este vamos a probar la peticion a firebase
+                    Toast.makeText(context, "Peticion correcta.", Toast.LENGTH_SHORT).show()
+                }
 
-                 Resource.Loading -> {
-                     MerlinCircleProgressBar(
-                         modifier = modifier.constrainAs(progressBarIndicator) {
-                             top.linkTo(parent.top)
-                             start.linkTo(parent.start)
-                             end.linkTo(parent.end)
-                         }
-                     )
-                 }
+                Resource.Loading -> {
+                    MerlinCircleProgressBar(
+                        modifier = modifier.constrainAs(progressBarIndicator) {
+                            top.linkTo(parent.top)
+                            start.linkTo(parent.start)
+                            end.linkTo(parent.end)
+                        }
+                    )
+                }
 
-                 is Resource.Success -> {
-                     // TODO: Que hacer en caso de un success
-                 }
+                is Resource.Success -> {
+                    // TODO: Que hacer en caso de un success
+                }
 
-                 else -> {
-                     Toast.makeText(context, "Error desconocido", Toast.LENGTH_SHORT).show()
-                 }
-             }
-         }*/
-
+                else -> {
+                    Toast.makeText(context, "Error desconocido", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 }
 

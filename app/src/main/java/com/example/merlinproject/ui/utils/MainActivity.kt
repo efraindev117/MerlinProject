@@ -15,6 +15,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.merlinproject.ui.features.auth.login.LoginScreen
 import com.example.merlinproject.ui.features.auth.login.LoginViewModel
+import com.example.merlinproject.ui.features.auth.register.RegisterScreen
 import com.example.merlinproject.ui.navigation.NestedNavigation
 import com.example.merlinproject.ui.theme.MerlinProjectTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +35,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     navController = rememberNavController()
                    // NestedNavigation(navController = navController)
-                    LoginScreen(navHostController = navController )
+                    RegisterScreen(navHostController = navController )
                 }
 
             }

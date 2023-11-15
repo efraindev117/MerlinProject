@@ -29,10 +29,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.merlinproject.R
 import com.example.merlinproject.ui.features.auth.login.LoginViewModel
 import com.example.merlinproject.ui.features.auth.login.TextFieldMerlin
@@ -42,9 +44,9 @@ import com.example.merlinproject.ui.theme.MerlinProjectIcons
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterScreen(
-    navHostController: NavHostController,
+    navHostController: NavHostController = rememberNavController(),
     modifier: Modifier = Modifier,
-    mViewModel: LoginViewModel = hiltViewModel()
+    mViewModel: RegisterViewModel = hiltViewModel()
 ) {
     Scaffold(
         modifier = modifier,
@@ -70,7 +72,7 @@ fun RegisterScreen(
 fun ScreenRegisterContent(
     modifier: Modifier,
     innerPadding: PaddingValues,
-    mViewModel: LoginViewModel,
+    mViewModel: RegisterViewModel,
     navHostController: NavHostController
 ) {
     ConstraintLayout(
@@ -79,17 +81,48 @@ fun ScreenRegisterContent(
             .padding(innerPadding)
     ) {
         val (textFieldEmailAndPassword,
+            texFieldUsername,
             textFieldPassword,
             buttonLogin,
             txtSocialNetwork,
             btnGoogleSignIn) = createRefs()
-        val middleGuideline = createGuidelineFromTop(.2f)
+        val middleGuideline = createGuidelineFromTop(.1f)
         val bottomGuideline = createGuidelineFromBottom(.3f)
         val context = LocalContext.current
         var email by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
         var loading by remember { mutableStateOf(false) }
 
+        //Username
+        TextFieldMerlin(
+            value = mViewModel.username.value,
+            supportingText = { Text(text = "Nombre y apellido.") },
+            label = { Text(text = "Nombre", color = Color.Black) },
+            placeholder = { Text(text = "Texto de placeHolder") },
+            leadingIcon = {
+                Icon(
+                    imageVector = MerlinProjectIcons.usernameIcon,
+                    contentDescription = null
+                )
+            },
+            trailingIcon = {
+                Icon(
+                    imageVector = MerlinProjectIcons.cancelFilled,
+                    contentDescription = null
+                )
+            },
+            isError = true,
+            onValueChange = { mViewModel.username.value = it },
+            visualTransformation = VisualTransformation.None,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+            modifier = Modifier.constrainAs(texFieldUsername) {
+                top.linkTo(middleGuideline)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+            }
+        )
+
+        //Email
         TextFieldMerlin(
             value = mViewModel.email.value,
             supportingText = { Text(text = "Correo electronico") },
@@ -112,11 +145,15 @@ fun ScreenRegisterContent(
             visualTransformation = VisualTransformation.None,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             modifier = Modifier.constrainAs(textFieldEmailAndPassword) {
-                top.linkTo(middleGuideline)
+                top.linkTo(texFieldUsername.bottom)
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
+                bottom.linkTo(textFieldPassword.top)
             }
         )
+
+
+        //Password
         TextFieldMerlin(
             value = mViewModel.password.value,
             supportingText = { Text(text = "Contraseña", color = Color.Black) },
@@ -139,11 +176,12 @@ fun ScreenRegisterContent(
             onValueChange = { mViewModel.password.value = it },
             isError = false,
             modifier = Modifier
-                .padding(top = 32.dp)
+                //
                 .constrainAs(textFieldPassword) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     top.linkTo(textFieldEmailAndPassword.bottom)
+                    bottom.linkTo(buttonLogin.top)
                 }
         )
         Button(
@@ -160,6 +198,7 @@ fun ScreenRegisterContent(
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     top.linkTo(textFieldPassword.bottom)
+                    bottom.linkTo(txtSocialNetwork.top)
                 }
         ) {
             Text(text = "Registrarme")
@@ -173,6 +212,7 @@ fun ScreenRegisterContent(
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
                 top.linkTo(bottomGuideline)
+                bottom.linkTo(parent.bottom)
             })
         OutlinedButton(
             modifier = modifier
