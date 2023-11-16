@@ -34,8 +34,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     navController = rememberNavController()
-                   // NestedNavigation(navController = navController)
-                    RegisterScreen(navHostController = navController )
+                    NestedNavigation(navController = navController)
+                    //RegisterScreen(navHostController = navController )
                 }
 
             }

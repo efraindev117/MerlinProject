@@ -149,6 +149,8 @@ fun ScreenContent(
                 end.linkTo(parent.end)
             }
         )
+
+        //Password
         TextFieldMerlin(
             value = mviewModel.password.value.trim(),
             supportingText = {
@@ -195,7 +197,7 @@ fun ScreenContent(
 
         //Boton para mandar la peticion
         Button(
-            onClick = { mviewModel.login() },
+            onClick = { mviewModel.loginFirebase() },
             shape = MaterialTheme.shapes.extraSmall,
             colors = ButtonDefaults.buttonColors(
                 contentColor = Color.White,
@@ -210,10 +212,9 @@ fun ScreenContent(
                     end.linkTo(parent.end)
                     top.linkTo(textFieldPassword.bottom)
                 }
-        ) {
+        ){
             Text(text = "Entrar")
         }
-
 
         Text(
             text = "Sign In with Social networks",
@@ -224,6 +225,8 @@ fun ScreenContent(
                 top.linkTo(buttonLogin.bottom)
                 bottom.linkTo(btnGoogleSignIn.top)
             })
+
+
         OutlinedButton(
             modifier = modifier
                 .constrainAs(btnGoogleSignIn) {
@@ -258,6 +261,7 @@ fun ScreenContent(
             }) {
             Text(
                 text = "No tienes una cuenta? Registrate!",
+                color = Color.Black,
                 fontStyle = FontStyle.Normal,
                 textDecoration = TextDecoration.Underline
             )
@@ -267,7 +271,7 @@ fun ScreenContent(
             when (it) {
                 is Resource.Failure -> {
                     // TODO: con este vamos a probar la peticion a firebase
-                    Toast.makeText(context, "Peticion correcta.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
                 }
 
                 Resource.Loading -> {
@@ -281,7 +285,8 @@ fun ScreenContent(
                 }
 
                 is Resource.Success -> {
-                    // TODO: Que hacer en caso de un success
+                    Toast.makeText(context, "Bienvenido a Daily UACM", Toast.LENGTH_SHORT).show()
+                   navHostController.navigate(ScreensNavigation.BachelorsScreen.route)
                 }
 
                 else -> {

@@ -1,5 +1,7 @@
 package com.example.merlinproject.ui.features.auth.login
 
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -9,12 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextFieldMerlin(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.width(300.dp),
     value: String,
     maxLines: Int = 1,
     singleLine: Boolean = true,
@@ -30,7 +33,7 @@ fun TextFieldMerlin(
     visualTransformation: VisualTransformation
 ) {
     TextField(
-        modifier = modifier,
+        modifier = modifier.width(280.dp),
         value = value,
         singleLine = singleLine,
         maxLines = maxLines,

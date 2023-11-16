@@ -3,9 +3,11 @@ package com.example.merlinproject.ui.features.auth.register
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -28,6 +30,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -40,6 +43,7 @@ import com.example.merlinproject.ui.features.auth.login.LoginViewModel
 import com.example.merlinproject.ui.features.auth.login.TextFieldMerlin
 import com.example.merlinproject.ui.navigation.ScreensNavigation
 import com.example.merlinproject.ui.theme.MerlinProjectIcons
+import com.example.merlinproject.ui.theme.MerlinProjectIcons.cancelOutlined
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -88,15 +92,31 @@ fun ScreenRegisterContent(
             btnGoogleSignIn) = createRefs()
         val middleGuideline = createGuidelineFromTop(.1f)
         val bottomGuideline = createGuidelineFromBottom(.3f)
-        val context = LocalContext.current
-        var email by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
         var loading by remember { mutableStateOf(false) }
+        val context = LocalContext.current
+        //Email
+        var email by remember { mutableStateOf("") }
+        //password
+        var password by remember { mutableStateOf("") }
+        var passwordVisibility by remember { mutableStateOf(false) }
+        var usernameVisibility by remember { mutableStateOf(false) }
 
         //Username
         TextFieldMerlin(
             value = mViewModel.username.value,
-            supportingText = { Text(text = "Nombre y apellido.") },
+            validateField = { mViewModel.validateUsername() },
+            supportingText = {
+                if (mViewModel.username.value.isNotEmpty()) {
+                    val message = if (mViewModel.isUsernameValid.value) {
+                        mViewModel.usernameMsgResult.value
+                    } else {
+                        mViewModel.usernameMsgResult.value
+                    }
+                    Text(text = message)
+                } else {
+                    Text(text = "Nombre de usuario")
+                }
+            },
             label = { Text(text = "Nombre", color = Color.Black) },
             placeholder = { Text(text = "Texto de placeHolder") },
             leadingIcon = {
@@ -106,26 +126,46 @@ fun ScreenRegisterContent(
                 )
             },
             trailingIcon = {
-                Icon(
-                    imageVector = MerlinProjectIcons.cancelFilled,
-                    contentDescription = null
-                )
+                val icon = if (usernameVisibility) {
+                    MerlinProjectIcons.cancelOutlined
+                } else {
+                    MerlinProjectIcons.cancelOutlined
+                }
+                IconButton(
+                    onClick = { mViewModel.username.value = "" },
+                    enabled = mViewModel.username.value.isNotEmpty()
+                ) {
+                    Icon(imageVector = icon, contentDescription = null)
+                }
             },
             isError = true,
             onValueChange = { mViewModel.username.value = it },
             visualTransformation = VisualTransformation.None,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-            modifier = Modifier.constrainAs(texFieldUsername) {
-                top.linkTo(middleGuideline)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-            }
+            modifier = Modifier
+                .constrainAs(texFieldUsername) {
+                    top.linkTo(middleGuideline)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
         )
 
         //Email
         TextFieldMerlin(
             value = mViewModel.email.value,
-            supportingText = { Text(text = "Correo electronico") },
+            validateField = { mViewModel.validateEmail() },
+            supportingText = {
+                if (mViewModel.email.value.isNotEmpty()) {
+                    val message = if (mViewModel.isEmailValid.value) {
+                        mViewModel.emailMsgResult.value
+                    } else {
+                        mViewModel.emailMsgResult.value
+                    }
+                    Text(text = message)
+                } else {
+                    Text(text = "Correo electronico")
+                }
+            },
             label = { Text(text = "Email", color = Color.Black) },
             placeholder = { Text(text = "Texto de placeHolder") },
             leadingIcon = {
@@ -135,31 +175,50 @@ fun ScreenRegisterContent(
                 )
             },
             trailingIcon = {
-                Icon(
-                    imageVector = MerlinProjectIcons.cancelFilled,
-                    contentDescription = null
-                )
+                val icon = if (passwordVisibility) {
+                    MerlinProjectIcons.cancelOutlined
+                } else {
+                    MerlinProjectIcons.cancelOutlined
+                }
+                IconButton(
+                    onClick = { mViewModel.email.value = "" },
+                    enabled = mViewModel.email.value.isNotEmpty()
+                ) {
+                    Icon(imageVector = icon, contentDescription = null)
+                }
             },
             isError = true,
             onValueChange = { mViewModel.email.value = it },
             visualTransformation = VisualTransformation.None,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-            modifier = Modifier.constrainAs(textFieldEmailAndPassword) {
-                top.linkTo(texFieldUsername.bottom)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-                bottom.linkTo(textFieldPassword.top)
-            }
+            modifier = Modifier
+                .padding(top = 16.dp)
+                .constrainAs(textFieldEmailAndPassword) {
+                    top.linkTo(texFieldUsername.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
         )
-
 
         //Password
         TextFieldMerlin(
             value = mViewModel.password.value,
-            supportingText = { Text(text = "Contraseña", color = Color.Black) },
+            validateField = { mViewModel.validatePassword() },
+            supportingText = {
+                if (mViewModel.password.value.isNotEmpty()) {
+                    val message = if (mViewModel.isPasswordValid.value) {
+                        mViewModel.passwordMsgResult.value
+                    } else {
+                        mViewModel.passwordMsgResult.value
+                    }
+                    Text(text = message)
+                } else {
+                    Text(text = "Contraseña")
+                }
+            },
             label = { Text(text = "password", color = Color.Black) },
             placeholder = { Text(text = "") },
-            visualTransformation = VisualTransformation.None,
+            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             leadingIcon = {
                 Icon(
@@ -167,44 +226,56 @@ fun ScreenRegisterContent(
                     contentDescription = null
                 )
             },
+
             trailingIcon = {
-                Icon(
-                    imageVector = MerlinProjectIcons.visibilityFilled,
-                    contentDescription = null
-                )
+                val icon = if (passwordVisibility) {
+                    MerlinProjectIcons.visibilityFilled
+                } else {
+                    MerlinProjectIcons.visibilityOffFilled
+                }
+                IconButton(
+                    onClick = { passwordVisibility = !passwordVisibility },
+                    enabled = mViewModel.password.value.isNotEmpty()
+                ) {
+                    Icon(imageVector = icon, contentDescription = null)
+                }
             },
             onValueChange = { mViewModel.password.value = it },
             isError = false,
             modifier = Modifier
-                //
+                .padding(top = 16.dp)
                 .constrainAs(textFieldPassword) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     top.linkTo(textFieldEmailAndPassword.bottom)
-                    bottom.linkTo(buttonLogin.top)
+
                 }
         )
+
+
+        //Button de registro
         Button(
             onClick = { navHostController.navigate(ScreensNavigation.BachelorsScreen.route) },
             shape = MaterialTheme.shapes.extraSmall,
+            enabled = mViewModel.isEmailValid.value && mViewModel.isPasswordValid.value && mViewModel.isUsernameValid.value,
             colors = ButtonDefaults.buttonColors(
                 contentColor = Color.White,
                 containerColor = Color.Black
             ),
             modifier = Modifier
-                .padding(top = 32.dp)
+                .padding(top = 64.dp)
                 .width(220.dp)
                 .constrainAs(buttonLogin) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     top.linkTo(textFieldPassword.bottom)
-                    bottom.linkTo(txtSocialNetwork.top)
                 }
         ) {
             Text(text = "Registrarme")
         }
 
 
+        //Registro con redes sociales
         Text(
             text = "Registro con redes sociales",
             style = MaterialTheme.typography.bodySmall,
@@ -212,8 +283,9 @@ fun ScreenRegisterContent(
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
                 top.linkTo(bottomGuideline)
-                bottom.linkTo(parent.bottom)
             })
+
+        //Google button
         OutlinedButton(
             modifier = modifier
                 .constrainAs(btnGoogleSignIn) {

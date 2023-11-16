@@ -50,21 +50,21 @@ class RegisterViewModel @Inject constructor(private val registerUsesCase: IFireb
 
     fun validateEmail() {
         //saber si el Email valido
-        if (Patterns.EMAIL_ADDRESS.matcher(email.value).matches()) {
+        if (Patterns.EMAIL_ADDRESS .matcher(email.value).matches()) {
             //Accedemos al valor
             isEmailValid.value = true
-            emailMsgResult.value = "El correo es válido.♥ "
+            emailMsgResult.value = "El correo es válido"
         } else {
             //Accedemos al valor
             isEmailValid.value = false
-            emailMsgResult.value = "El correo no es válido."
+            emailMsgResult.value = "El correo no es válido"
         }
     }
 
     fun validatePassword() {
         if (password.value.length >= 6) {
             isPasswordValid.value = true
-            passwordMsgResult.value = "Formato correcto."
+            passwordMsgResult.value = "Formato correcto"
         } else {
             isPasswordValid.value = false
             passwordMsgResult.value = "Introduce almenos 6 carácteres."
@@ -74,7 +74,7 @@ class RegisterViewModel @Inject constructor(private val registerUsesCase: IFireb
     fun validateUsername(){
         if (username.value.length >= 6){
             isUsernameValid.value = true
-            usernameMsgResult.value = "Nombre Valido"
+            usernameMsgResult.value = "Nombre Válido"
         }else{
             isUsernameValid.value = false
             usernameMsgResult.value = "El nombre es muy corto"
