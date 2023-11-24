@@ -1,15 +1,21 @@
 package com.example.merlinproject.ui.features.auth.login
 
+import TextFieldMerlin
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AlternateEmail
+import androidx.compose.material.icons.filled.Key
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -20,16 +26,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -41,31 +49,25 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.merlinproject.R
-import com.example.merlinproject.data.Resource
+import com.example.merlinproject.common.Resource
 import com.example.merlinproject.ui.navigation.ScreensNavigation
+import com.example.merlinproject.ui.theme.MerlinProjectIcons
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.cancelFilled
-import com.example.merlinproject.ui.theme.MerlinProjectIcons.checkIconError
-import com.example.merlinproject.ui.theme.MerlinProjectIcons.checkIconOk
-import com.example.merlinproject.ui.theme.MerlinProjectIcons.emailOutlined
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.navigateToBack
-import com.example.merlinproject.ui.theme.MerlinProjectIcons.passwordFilled
-import com.example.merlinproject.ui.theme.MerlinProjectIcons.passwordOutlined
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.visibilityFilled
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.visibilityOffFilled
-import com.example.merlinproject.ui.utils.composables.MerlinCircleProgressBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
     navHostController: NavHostController,
     modifier: Modifier = Modifier,
-    mviewModel: LoginViewModel = hiltViewModel()
 ) {
     Scaffold(
         modifier = modifier,
         topBar = {
             TopAppBar(
-                title = { Text(text = "Inicia sesión") },
+                title = { Text(text = stringResource(id = R.string.login_screen_title)) },
                 navigationIcon = {
                     IconButton(onClick = { navHostController.navigate(ScreensNavigation.WelcomeScreen.route) }) {
                         Icon(imageVector = navigateToBack, contentDescription = "Navigate To Back")
@@ -74,7 +76,7 @@ fun LoginScreen(
             )
         }
     ) { innerPadding ->
-        ScreenContent(modifier, innerPadding, navHostController, mviewModel)
+        ScreenContent(modifier, innerPadding, navHostController)
     }
 }
 
@@ -83,9 +85,8 @@ fun ScreenContent(
     modifier: Modifier,
     innerPadding: PaddingValues,
     navHostController: NavHostController,
-    mviewModel: LoginViewModel
+    mViewModel: LoginViewModel = hiltViewModel()
 ) {
-    val loginFlow = mviewModel.loginFlow.collectAsState()
     ConstraintLayout(
         modifier = modifier
             .fillMaxSize()
@@ -95,37 +96,38 @@ fun ScreenContent(
             textFieldPassword,
             buttonLogin,
             txtSocialNetwork,
-            progressBarIndicator,
             btnTextRegister,
             btnGoogleSignIn) = createRefs()
         val middleGuideline = createGuidelineFromTop(.2f)
-        val context = LocalContext.current
-        //Email and Password
-        // var email by remember { mutableStateOf("") }
-        //Password
-        // var password by remember { mutableStateOf("") }
         var passwordVisibility by remember { mutableStateOf(false) }
-        //var isErrorState by remember { mutableStateOf(true) }
-        //var loading by remember { mutableStateOf(false) }
 
-
+        //Email
         TextFieldMerlin(
-            value = mviewModel.email.value.trim(),
+            modifier = Modifier
+                .width(280.dp)
+                .constrainAs(textFieldEmailAndPassword) {
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    top.linkTo(middleGuideline)
+                },
+            value = mViewModel.email.value,
+            validateField = { mViewModel.validateEmail() },
+            label = stringResource(id = R.string.login_screen_email_text_field_label),
             supportingText = {
-                if (mviewModel.email.value.isNotEmpty()) {
-                    val message = if (mviewModel.isEmailValid.value) {
-                        mviewModel.emailMsgResult.value
+                if (mViewModel.email.value.isNotEmpty()) {
+                    val message = if (mViewModel.emailValidate.value) {
+                        mViewModel.emailErrMsg.value
                     } else {
-                        mviewModel.emailMsgResult.value
+                        mViewModel.emailErrMsg.value
                     }
                     Text(text = message)
                 } else {
-                    Text(text = "Correo electronico")
+                    Text(text = stringResource(id = R.string.login_screen_email_text_field_msg))
                 }
             },
-            label = { Text(text = "Email") },
-            placeholder = { Text(text = "Email") },
-            leadingIcon = { Icon(imageVector = emailOutlined, contentDescription = null) },
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email),
+            visualTransformation = VisualTransformation.None,
+            leadingIcon = MerlinProjectIcons.emailOutlined,
             trailingIcon = {
                 val icon = if (passwordVisibility) {
                     cancelFilled
@@ -133,43 +135,35 @@ fun ScreenContent(
                     cancelFilled
                 }
                 IconButton(
-                    onClick = { mviewModel.email.value = "" },
-                    enabled = mviewModel.email.value.isNotEmpty()
+                    onClick = { mViewModel.email.value = "" },
+                    enabled = mViewModel.email.value.isNotEmpty()
                 ) {
                     Icon(imageVector = icon, contentDescription = null)
                 }
             },
-            onValueChange = { mviewModel.email.value = it },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-            validateField = { mviewModel.validateEmail() },
-            visualTransformation = VisualTransformation.None,
-            modifier = Modifier.constrainAs(textFieldEmailAndPassword) {
-                top.linkTo(middleGuideline)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-            }
+            onValueChange = { mViewModel.email.value = it }
         )
 
         //Password
         TextFieldMerlin(
-            value = mviewModel.password.value.trim(),
-            supportingText = {
-                if (mviewModel.password.value.isNotEmpty()) {
-                    val message = if (mviewModel.isPasswordValid.value) {
-                        mviewModel.passwordMsgResult.value
-                    } else {
-                        mviewModel.passwordMsgResult.value
-                    }
-                    Text(text = message)
-                } else {
-                    Text(text = "Contraseña")
-                }
+            modifier = Modifier
+                .width(280.dp)
+                .padding(top = 32.dp)
+                .constrainAs(textFieldPassword) {
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    top.linkTo(textFieldEmailAndPassword.bottom)
+                },
+            value = mViewModel.password.value,
+            validateField = { mViewModel.validatePassword() },
+            label = stringResource(id = R.string.login_screen_password_text_field_label),
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password),
+            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+            leadingIcon = Icons.Default.Key,
+            onValueChange = {
+                mViewModel.password.value = it
+                //Lógica de validación específica del email
             },
-            label = { Text(text = "password") },
-            isError = mviewModel.isPasswordValid.value,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            placeholder = { Text(text = "") },
-            leadingIcon = { Icon(imageVector = passwordFilled, contentDescription = null) },
             trailingIcon = {
                 val icon = if (passwordVisibility) {
                     visibilityFilled
@@ -178,32 +172,36 @@ fun ScreenContent(
                 }
                 IconButton(
                     onClick = { passwordVisibility = !passwordVisibility },
-                    enabled = mviewModel.password.value.isNotEmpty()
+                    enabled = mViewModel.password.value.isNotEmpty()
                 ) {
                     Icon(imageVector = icon, contentDescription = null)
                 }
             },
-            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
-            onValueChange = { mviewModel.password.value = it },
-            validateField = { mviewModel.validatePassword() },
-            modifier = Modifier
-                .padding(top = 32.dp)
-                .constrainAs(textFieldPassword) {
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    top.linkTo(textFieldEmailAndPassword.bottom)
+            supportingText = {
+                if (mViewModel.password.value.isNotEmpty()) {
+                    val message = if (mViewModel.passwordValidate.value) {
+                        mViewModel.passwordErrMsg.value
+                    } else {
+                        mViewModel.passwordErrMsg.value
+                    }
+                    Text(text = message)
+                } else {
+                    Text(text = stringResource(id = R.string.login_screen_password_text_field_label))
                 }
+            },
         )
 
         //Boton para mandar la peticion
         Button(
-            onClick = { mviewModel.loginFirebase() },
+            onClick = {
+                mViewModel.firebaseLoginWithEmailAndPassword()
+            },
+            enabled = mViewModel.isEnableFirebaseLoginButton,
             shape = MaterialTheme.shapes.extraSmall,
             colors = ButtonDefaults.buttonColors(
                 contentColor = Color.White,
                 containerColor = Color.Black
             ),
-            enabled = mviewModel.isEmailValid.value && mviewModel.isPasswordValid.value,
             modifier = Modifier
                 .padding(top = 32.dp)
                 .width(220.dp)
@@ -212,12 +210,12 @@ fun ScreenContent(
                     end.linkTo(parent.end)
                     top.linkTo(textFieldPassword.bottom)
                 }
-        ){
-            Text(text = "Entrar")
+        ) {
+            Text(text = stringResource(id = R.string.login_screen_title_button))
         }
 
         Text(
-            text = "Sign In with Social networks",
+            text = stringResource(id = R.string.login_screen_social_txt_ing),
             style = MaterialTheme.typography.bodySmall,
             modifier = modifier.constrainAs(txtSocialNetwork) {
                 start.linkTo(parent.start)
@@ -246,7 +244,7 @@ fun ScreenContent(
                     .height(24.dp)
             )
             Text(
-                text = "Continue with google",
+                text = stringResource(id = R.string.login_screen_title_Google_button),
                 style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Normal, color = MaterialTheme.colorScheme.onSurface
             )
@@ -260,38 +258,38 @@ fun ScreenContent(
                 bottom.linkTo(parent.bottom)
             }) {
             Text(
-                text = "No tienes una cuenta? Registrate!",
+                text = stringResource(id = R.string.login_screen_title_text_button),
                 color = Color.Black,
                 fontStyle = FontStyle.Normal,
                 textDecoration = TextDecoration.Underline
             )
         }
 
-        loginFlow.value?.let {
-            when (it) {
-                is Resource.Failure -> {
-                    // TODO: con este vamos a probar la peticion a firebase
-                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
-                }
 
-                Resource.Loading -> {
-                    MerlinCircleProgressBar(
-                        modifier = modifier.constrainAs(progressBarIndicator) {
-                            top.linkTo(parent.top)
-                            start.linkTo(parent.start)
-                            end.linkTo(parent.end)
-                        }
-                    )
+    }
+    mViewModel.loginFlow.collectAsState().value?.let { resourceState ->
+        when (resourceState) {
+            Resource.Loading -> {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    CircularProgressIndicator()
                 }
+            }
 
-                is Resource.Success -> {
-                    Toast.makeText(context, "Bienvenido a Daily UACM", Toast.LENGTH_SHORT).show()
-                   navHostController.navigate(ScreensNavigation.BachelorsScreen.route)
+            is Resource.Success -> {
+                LaunchedEffect(Unit) {
+                    navHostController.navigate(ScreensNavigation.BachelorsScreen.route) {
+                        //Eliminar el screen anterior
+                        popUpTo(ScreensNavigation.LoginScreen.route) { inclusive = true }
+                        // TODO: hacer lo mismo pero en la pantalla del registro.
+                    }
                 }
+            }
 
-                else -> {
-                    Toast.makeText(context, "Error desconocido", Toast.LENGTH_SHORT).show()
-                }
+            is Resource.Failure -> {
+                // TODO: con este vamos a probar la peticion a firebase
             }
         }
     }

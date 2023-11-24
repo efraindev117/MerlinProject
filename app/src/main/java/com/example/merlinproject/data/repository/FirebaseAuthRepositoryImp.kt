@@ -1,22 +1,22 @@
 package com.example.merlinproject.data.repository
 
-import com.example.merlinproject.data.Resource
-import com.example.merlinproject.data.firebaseAwait
+import com.example.merlinproject.common.Resource
+import com.example.merlinproject.domain.model.UserModel
 import com.example.merlinproject.domain.repository.IFirebaseAuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class FirebaseAuthRepositoryImp @Inject constructor(private val firebaseAuth: FirebaseAuth) :
     IFirebaseAuthRepository {
 
-    override val currentUser: FirebaseUser?
-        get() = firebaseAuth.currentUser
+    override val currentUser: FirebaseUser? get() = firebaseAuth.currentUser
 
     override suspend fun login(email: String, password: String): Resource<FirebaseUser> {
         return try {
-            val result = firebaseAuth.signInWithEmailAndPassword(email, password).firebaseAwait()
+            val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
             Resource.Success(result.user!!)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -24,14 +24,9 @@ class FirebaseAuthRepositoryImp @Inject constructor(private val firebaseAuth: Fi
         }
     }
 
-    override suspend fun signUp(name: String, email: String, password: String)
-    : Resource<FirebaseUser> {
+    override suspend fun signUp(user: UserModel): Resource<FirebaseUser> {
         return try {
-            val result = firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .firebaseAwait()
-            result?.user?.updateProfile(
-                UserProfileChangeRequest.Builder().setDisplayName(name).build()
-            )?.firebaseAwait()
+            val result = firebaseAuth.createUserWithEmailAndPassword(user.email, user.password).await()
             Resource.Success(result.user!!)
         } catch (e: Exception) {
             e.printStackTrace()

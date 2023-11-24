@@ -5,90 +5,79 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.merlinproject.data.Resource
-import com.example.merlinproject.domain.repository.IFirebaseAuthRepository
+import com.example.merlinproject.common.Resource
 import com.example.merlinproject.domain.usescase.auth.login.AuthUsesCase
-import com.google.android.gms.common.api.Response
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val autUsesCase: AuthUsesCase) :
+class LoginViewModel @Inject constructor(private val authUsesCase: AuthUsesCase) :
     ViewModel() {
 
-    //Email setup
+    //email
     var email: MutableState<String> = mutableStateOf("")
-    var isEmailValid: MutableState<Boolean> = mutableStateOf(false)
-    var emailMsgResult: MutableState<String> = mutableStateOf("")
+    var emailValidate: MutableState<Boolean> = mutableStateOf(false)
+    var emailErrMsg: MutableState<String> = mutableStateOf("")
 
-    //Password setup
+    //password
     var password: MutableState<String> = mutableStateOf("")
-    var isPasswordValid: MutableState<Boolean> = mutableStateOf(false)
-    var passwordMsgResult: MutableState<String> = mutableStateOf("")
+    var passwordValidate: MutableState<Boolean> = mutableStateOf(false)
+    var passwordErrMsg: MutableState<String> = mutableStateOf("")
 
-    //Login
+
     private val _loginFlow = MutableStateFlow<Resource<FirebaseUser>?>(null)
     val loginFlow: StateFlow<Resource<FirebaseUser>?> = _loginFlow
 
-    //Register
-    private val _signUpFlow = MutableStateFlow<Resource<FirebaseUser>?>(null)
-    val signUpFlow: StateFlow<Resource<FirebaseUser>?> = _signUpFlow
-
-    /*   val currentUser: FirebaseUser?
-           get() = repository.currentUser
-
-       init {
-           if (repository.currentUser != null) {
-               _loginFlow.value = Resource.Success(repository.currentUser!!)
-           }
-       }*/
-
-    fun loginFirebase() = viewModelScope.launch {
+    //Login flow
+    fun firebaseLoginWithEmailAndPassword() = viewModelScope.launch {
         _loginFlow.value = Resource.Loading
-        val result = autUsesCase.login(email.value, password.value)
+        val result = authUsesCase.login.invoke(email.value, password.value)
         _loginFlow.value = result
     }
 
-    /*fun login() = viewModelScope.launch {
-        _loginFlow.value = Resource.Loading
-        val result = autUsesCase.login(email.value, password.value)
-        _loginFlow.value = result
-    }*/
+    //enable button
+    var isEnableFirebaseLoginButton = false
 
+    private fun enabledFirebaseLoginButton() {
+        isEnableFirebaseLoginButton = emailValidate.value && passwordValidate.value
+    }
 
+    //current user
+    private val currentUser = authUsesCase.getCurrentUser()
 
-
-    fun validateEmail() {
-        //saber si el Email valido
-        if (Patterns.EMAIL_ADDRESS.matcher(email.value).matches()) {
-            //Accedemos al valor
-            isEmailValid.value = true
-            emailMsgResult.value = "El correo es válido.♥ "
-        } else {
-            //Accedemos al valor
-            isEmailValid.value = false
-            emailMsgResult.value = "El correo no es válido."
+    init {
+        if (authUsesCase.getCurrentUser() != null) {
+            _loginFlow.value = Resource.Success(currentUser!!)
         }
     }
 
+    //Validate email
+    fun validateEmail() {
+        if (Patterns.EMAIL_ADDRESS.matcher(email.value).matches()) {
+            emailValidate.value = true
+            emailErrMsg.value = "Correo válido"
+        } else {
+            emailValidate.value = false
+            emailErrMsg.value = "Correo no válido"
+        }
+        enabledFirebaseLoginButton()
+    }
+
+    //Validate password
     fun validatePassword() {
         if (password.value.length >= 6) {
-            isPasswordValid.value = true
-            passwordMsgResult.value = "Formato correcto."
+            passwordValidate.value = true
+            passwordErrMsg.value = "Contraseña valida"
         } else {
-            isPasswordValid.value = false
-            passwordMsgResult.value = "Introduce almenos 6 carácteres."
+            passwordValidate.value = false
+            passwordErrMsg.value = "Introduce almenos 6 carácteres."
         }
+        enabledFirebaseLoginButton()
     }
 
-    fun login(email: String, password: String) = viewModelScope.launch {
-        _loginFlow.value = Resource.Loading
-        val result = autUsesCase.login(email, password)
-        _loginFlow.value = result
-    }
+
 }

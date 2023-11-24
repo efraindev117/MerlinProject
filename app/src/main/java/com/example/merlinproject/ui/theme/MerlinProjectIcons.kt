@@ -1,4 +1,5 @@
 package com.example.merlinproject.ui.theme
+
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.Book
@@ -13,6 +14,7 @@ import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Key
+import androidx.compose.material.icons.filled.LabelImportant
 import androidx.compose.material.icons.filled.Mail
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Policy
@@ -31,6 +33,7 @@ import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Key
+import androidx.compose.material.icons.outlined.LabelImportant
 import androidx.compose.material.icons.outlined.Mail
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Policy
@@ -52,6 +55,7 @@ object MerlinProjectIcons {
     val agendaOutlined = Icons.Outlined.ChecklistRtl
     val userFilled = Icons.Filled.Person
     val userOutLined = Icons.Outlined.Person
+
     // TODO: teacher_icon
     val ratingFilled = Icons.Filled.EmojiEvents
     val ratingOutlined = Icons.Outlined.EmojiEvents
@@ -67,6 +71,7 @@ object MerlinProjectIcons {
     val helpAndOpinionOutlined = Icons.Filled.ContactSupport
     val helpAndOpinionFilled = Icons.Outlined.ContactSupport
     val policyOutlined = Icons.Filled.Policy
+
     // TODO: gravel icon terminos y condiciones.
     val navigateToBack = Icons.Filled.ArrowBackIosNew
     val assitOutlined = Icons.Outlined.Info
@@ -76,4 +81,5 @@ object MerlinProjectIcons {
     val checkIconOk = Icons.Filled.CheckCircle
     val checkIconError = Icons.Filled.Error
     val usernameIcon = Icons.Outlined.Face
+    val labelImportantDefault = Icons.Outlined.LabelImportant
 }

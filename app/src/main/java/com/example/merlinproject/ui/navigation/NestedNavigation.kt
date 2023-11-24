@@ -18,7 +18,7 @@ fun NestedNavigation(navController: NavHostController) {
         composable(route = ScreensNavigation.WelcomeScreen.route) {
             WelcomeScreen(navController)
         }
-        
+
         composable(route = ScreensNavigation.LoginScreen.route) {
             LoginScreen(navHostController = navController)
         }
@@ -27,7 +27,7 @@ fun NestedNavigation(navController: NavHostController) {
             RegisterScreen(navHostController = navController)
         }
         composable(route = ScreensNavigation.BachelorsScreen.route) {
-            BachelorsScreen()
+            BachelorsScreen(navHostController = navController)
         }
     }
 }
