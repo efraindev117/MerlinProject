@@ -1,13 +1,15 @@
 package com.example.merlinproject.ui.features.bachelors
 
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -18,6 +20,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.ResourceResolutionException
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -25,17 +28,20 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.merlinproject.R
+import com.example.merlinproject.common.Resource
+import com.example.merlinproject.domain.model.CampusModel
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.academyIcon
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.favoriteIcon
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.labelImportantDefault
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.universityIcon
+import org.w3c.dom.Text
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BachelorsScreen(
     navHostController: NavHostController,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     Scaffold(
         modifier = modifier,
@@ -51,7 +57,7 @@ fun BachelorsScreen(
 fun ScreenBachelorsContent(
     modifier: Modifier,
     paddingValues: PaddingValues,
-    mViewModel: BachelorsViewModel = hiltViewModel()
+    mviewModel: BachelorsViewModel = hiltViewModel()
 ) {
     ConstraintLayout(
         modifier
@@ -64,11 +70,11 @@ fun ScreenBachelorsContent(
             txtAcademy,
             iconBachelors,
             txtBachelors,
+            lazyColumnCampus,
             cardWithMessage) = createRefs()
         val guidelineTop = createGuidelineFromTop(.1f)
         val guidelineMedium = createGuidelineFromTop(.3f)
         val guidelineEnd = createGuidelineFromTop(.5f)
-
 
         Card(modifier = Modifier
             .fillMaxWidth()
@@ -90,97 +96,15 @@ fun ScreenBachelorsContent(
             }
         }
 
-        Icon(
-            imageVector = universityIcon,
-            contentDescription = null,
-            modifier
-                .padding(start = 16.dp, top = 16.dp)
-                .constrainAs(iconUniversity) {
-                    top.linkTo(guidelineTop)
-                    start.linkTo(parent.start)
-                }
-        )
 
-        Text(
-            text = "${mViewModel.userData.name}",
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = modifier
-                .padding(start = 8.dp, top = 16.dp)
-                .constrainAs(txtUniversity) {
-                    top.linkTo(guidelineTop)
-                    start.linkTo(iconUniversity.end)
-                    bottom.linkTo(iconUniversity.bottom)
-                }
-        )
 
-        Icon(
-            imageVector = academyIcon,
-            contentDescription = null,
-            modifier
-                .padding(start = 16.dp)
-                .constrainAs(iconAcademy) {
-                    top.linkTo(guidelineMedium)
-                    start.linkTo(parent.start)
-                }
-        )
-
-        Text(
-            text = "Academia",
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = modifier
-                .padding(start = 8.dp)
-                .constrainAs(txtAcademy) {
-                    top.linkTo(guidelineMedium)
-                    start.linkTo(iconAcademy.end)
-                    bottom.linkTo(iconAcademy.bottom)
-                }
-        )
-
-        Icon(
-            imageVector = academyIcon,
-            contentDescription = null,
-            modifier
-                .padding(start = 16.dp)
-                .constrainAs(iconAcademy) {
-                    top.linkTo(guidelineMedium)
-                    start.linkTo(parent.start)
-                }
-        )
-
-        Text(
-            text = "Academia",
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = modifier
-                .padding(start = 8.dp)
-                .constrainAs(txtAcademy) {
-                    top.linkTo(guidelineMedium)
-                    start.linkTo(iconAcademy.end)
-                    bottom.linkTo(iconAcademy.bottom)
-                }
-        )
-
-        Icon(
-            imageVector = favoriteIcon,
-            contentDescription = null,
-            modifier
-                .padding(start = 16.dp)
-                .constrainAs(iconBachelors) {
-                    top.linkTo(guidelineEnd)
-                    start.linkTo(parent.start)
-                }
-        )
-
-        Text(
-            text = "Licenciatura",
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = modifier
-                .padding(start = 8.dp)
-                .constrainAs(txtBachelors) {
-                    top.linkTo(guidelineEnd)
-                    start.linkTo(iconBachelors.end)
-                    bottom.linkTo(iconBachelors.bottom)
-                }
-        )
-
+        Box(modifier.fillMaxSize()
+            .constrainAs(lazyColumnCampus) {
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+            top.linkTo(guidelineMedium)
+        }) {
+            GetCampus()
+        }
     }
 }

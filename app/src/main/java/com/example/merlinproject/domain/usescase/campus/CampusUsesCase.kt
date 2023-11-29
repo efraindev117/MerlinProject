@@ -1,0 +1,5 @@
+package com.example.merlinproject.domain.usescase.campus
+
+data class CampusUsesCase(
+    val getCampus: GetCampus
+)

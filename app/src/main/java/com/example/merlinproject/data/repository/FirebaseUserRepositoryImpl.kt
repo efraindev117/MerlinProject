@@ -1,6 +1,7 @@
 package com.example.merlinproject.data.repository
 
 import com.example.merlinproject.common.Resource
+import com.example.merlinproject.data.di.FirebaseUsersCollection
 import com.example.merlinproject.domain.model.BachelorsModel
 import com.example.merlinproject.domain.model.UserFirebase
 import com.example.merlinproject.domain.model.UserModel
@@ -14,7 +15,9 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class FirebaseUserRepositoryImpl @Inject constructor(private val usersRef: CollectionReference) :
+class FirebaseUserRepositoryImpl @Inject constructor(
+    @FirebaseUsersCollection private val usersRef: CollectionReference
+) :
     IFirebaseUserRepository {
 
     override suspend fun createNewUser(user: UserModel): Resource<Boolean> {
