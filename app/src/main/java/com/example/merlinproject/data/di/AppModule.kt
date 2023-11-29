@@ -1,17 +1,20 @@
 package com.example.merlinproject.data.di
 
-import com.example.merlinproject.data.repository.FirebaseAuthRepositoryImp
-import com.example.merlinproject.data.repository.FirebaseUserRepositoryImpl
+import com.example.merlinproject.common.Constants.CAMPUS_FIREBASE
+import com.example.merlinproject.common.Constants.USERS_FIREBASE
 import com.example.merlinproject.domain.repository.IFirebaseAuthRepository
+import com.example.merlinproject.domain.repository.IFirebaseCampusRepository
 import com.example.merlinproject.domain.repository.IFirebaseUserRepository
 import com.example.merlinproject.domain.usescase.auth.login.AuthUsesCase
 import com.example.merlinproject.domain.usescase.auth.login.GetCurrentUser
 import com.example.merlinproject.domain.usescase.auth.login.Login
 import com.example.merlinproject.domain.usescase.auth.login.Logout
 import com.example.merlinproject.domain.usescase.auth.register.SignUp
+import com.example.merlinproject.domain.usescase.campus.CampusUsesCase
+import com.example.merlinproject.domain.usescase.campus.GetCampusByName
 import com.example.merlinproject.domain.usescase.users.CreateUser
+import com.example.merlinproject.domain.usescase.users.GetUserById
 import com.example.merlinproject.domain.usescase.users.UsersUsesCase
-import com.example.merlinproject.domain.usescase.users.getBachelors
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,11 +24,21 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Qualifier
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class UsersCollection
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class PlantelCollection
 
 @InstallIn(SingletonComponent::class)
 @Module
 object AppModule {
 
+    //Firebase authentication
     @Provides
     fun provideFirebaseAuthInstance(): FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -33,19 +46,16 @@ object AppModule {
     @Provides
     fun provideFirestoreInstance(): FirebaseFirestore = Firebase.firestore
 
-    //Referencia de la collection
+    //Reference de la collection
     @Provides
+    @UsersCollection
     fun provideUsersCollection(db: FirebaseFirestore):
-            CollectionReference = db.collection("Users")
-
-    //implemntar repositorios
-    @Provides
-    fun provideAuthRepository(impl: FirebaseAuthRepositoryImp):
-            IFirebaseAuthRepository = impl
+            CollectionReference = db.collection(USERS_FIREBASE)
 
     @Provides
-    fun provideUsersRepository(impl: FirebaseUserRepositoryImpl):
-            IFirebaseUserRepository = impl
+    @PlantelCollection
+    fun providePlantelCollection(db: FirebaseFirestore):
+            CollectionReference = db.collection(CAMPUS_FIREBASE)
 
     //uses case
     @Provides
@@ -59,5 +69,13 @@ object AppModule {
     @Provides
     fun provideUsersUsesCase(repository: IFirebaseUserRepository) = UsersUsesCase(
         createUser = CreateUser(repository),
+        getUserById = GetUserById(repository)
     )
+
+    @Provides
+    fun provideCampusUsesCase(repository: IFirebaseCampusRepository) = CampusUsesCase(
+        getCampusByName = GetCampusByName(repository)
+    )
+
+
 }
