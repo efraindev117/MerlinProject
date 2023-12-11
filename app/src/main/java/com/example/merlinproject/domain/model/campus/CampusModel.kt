@@ -5,5 +5,11 @@ data class CampusModel(
     val name: String = "",
     val telephone: String = "",
     val url: String = "",
-    val email: String = ""
+    val email: String = "",
+    val ofertaAcademica: List<OfertaAcademica> = emptyList()
+)
+
+data class OfertaAcademica(
+    val licenciatura2: String = "",
+    val licenciaturas: List<String> = emptyList()
 )

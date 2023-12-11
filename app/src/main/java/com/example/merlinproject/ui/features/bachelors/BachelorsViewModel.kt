@@ -7,8 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.merlinproject.common.Resource
 import com.example.merlinproject.domain.model.campus.CampusModel
+import com.example.merlinproject.domain.model.campus.OfertaAcademica
 import com.example.merlinproject.domain.usescase.campus.CampusUsesCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,6 +21,7 @@ class BachelorsViewModel @Inject constructor(
 ) : ViewModel() {
 
     var campusResponse by mutableStateOf<Resource<List<CampusModel>>?>(null)
+    var ofertaResponse by mutableStateOf<Resource<List<OfertaAcademica>>?>(null)
 
     fun getCampus() = viewModelScope.launch {
         campusResponse = Resource.Loading
@@ -26,8 +30,16 @@ class BachelorsViewModel @Inject constructor(
         }
     }
 
+    fun getOfertas() = viewModelScope.launch {
+        ofertaResponse = Resource.Loading
+        campusUsesCase.getOferta().collect() {
+            ofertaResponse = it
+        }
+    }
+
     init {
         getCampus()
+        getOfertas()
     }
 
 }

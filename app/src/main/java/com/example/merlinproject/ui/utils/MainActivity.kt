@@ -31,10 +31,10 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     navController = rememberNavController()
-                    //NestedNavigation(navController = navController)
+                    NestedNavigation(navController = navController)
                     //RegisterScreen(navHostController = navController )
                     //LoginScreen(navHostController = navController)
-                    BachelorsScreen(navHostController = navController)
+                    //BachelorsScreen(navHostController = navController)
                 }
             }
         }

@@ -25,13 +25,14 @@ import dagger.hilt.components.SingletonComponent
 abstract class FirebaseTaskModule {
 
     @Binds
-    abstract fun provideAuthRepository(impl: FirebaseAuthRepositoryImp): IFirebaseAuthRepository
+    abstract fun provideAuthRepository(impl: FirebaseAuthRepositoryImp):
+            IFirebaseAuthRepository
 
     @Binds
     abstract fun provideUsersRepository(impl: FirebaseUserRepositoryImpl):
             IFirebaseUserRepository
 
     @Binds
-    abstract fun provideCampusRepository(impl:FirebaseCampusRepositoryImpl):
+    abstract fun provideCampusRepository(impl: FirebaseCampusRepositoryImpl):
             IFirebaseCampusRepository
 }
