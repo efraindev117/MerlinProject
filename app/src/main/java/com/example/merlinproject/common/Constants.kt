@@ -7,5 +7,5 @@ object Constants {
     const val SUBCOLLECTION = "ofertaAcademica"
     const val ALGOk = "humanidadesYCienciasSociales"
     const val ALGOl = "humanidadesYCienciasSociales"
-    const val ALGOñ = "humanidadesYCienciasSociales"
+    const val ALGOjñ = "humanidadesYCienciasSociales"
 }
