@@ -12,6 +12,7 @@ import com.example.merlinproject.domain.usescase.auth.login.Logout
 import com.example.merlinproject.domain.usescase.auth.register.SignUp
 import com.example.merlinproject.domain.usescase.campus.CampusUsesCase
 import com.example.merlinproject.domain.usescase.campus.GetCampusByName
+import com.example.merlinproject.domain.usescase.campus.GetCampusDocument
 import com.example.merlinproject.domain.usescase.campus.GetOferta
 import com.example.merlinproject.domain.usescase.users.CreateUser
 import com.example.merlinproject.domain.usescase.users.GetUserById
@@ -76,6 +77,7 @@ object AppModule {
     @Provides
     fun provideCampusUsesCase(repository: IFirebaseCampusRepository) = CampusUsesCase(
         getCampusByName = GetCampusByName(repository),
-        getOferta = GetOferta(repository)
+        getOferta = GetOferta(repository),
+        getDocument = GetCampusDocument(repository)
     )
 }

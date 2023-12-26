@@ -6,17 +6,8 @@ import com.example.merlinproject.data.repository.FirebaseUserRepositoryImpl
 import com.example.merlinproject.domain.repository.IFirebaseAuthRepository
 import com.example.merlinproject.domain.repository.IFirebaseCampusRepository
 import com.example.merlinproject.domain.repository.IFirebaseUserRepository
-import com.example.merlinproject.domain.usescase.auth.login.AuthUsesCase
-import com.example.merlinproject.domain.usescase.auth.login.GetCurrentUser
-import com.example.merlinproject.domain.usescase.auth.login.Login
-import com.example.merlinproject.domain.usescase.auth.login.Logout
-import com.example.merlinproject.domain.usescase.auth.register.SignUp
-import com.example.merlinproject.domain.usescase.users.CreateUser
-import com.example.merlinproject.domain.usescase.users.GetUserById
-import com.example.merlinproject.domain.usescase.users.UsersUsesCase
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 

@@ -1,7 +1,7 @@
 package com.example.merlinproject.ui.features.bachelors
 
-
-import androidx.compose.foundation.background
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,8 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.HistoryEdu
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,9 +21,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -31,11 +35,10 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.merlinproject.R
-import com.example.merlinproject.ui.theme.MerlinProjectIcons.academyIcon
-import com.example.merlinproject.ui.theme.MerlinProjectIcons.favoriteIcon
+import com.example.merlinproject.ui.features.bachelors.firestore.GetCampus
+import com.example.merlinproject.ui.features.bachelors.firestore.GetCampusDocument
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.labelImportantDefault
-import com.example.merlinproject.ui.theme.MerlinProjectIcons.universityIcon
-
+import kotlin.reflect.KProperty
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -66,6 +69,7 @@ fun ScreenBachelorsContent(
     ) {
         val (lazyCampus,
             txtCampusQuestión,
+            txtOferta,
             cardWithMessage) = createRefs()
         val guidelineTop = createGuidelineFromTop(.1f)
         val guidelineMedium = createGuidelineFromTop(.3f)
@@ -101,10 +105,24 @@ fun ScreenBachelorsContent(
             }
         ) {
             Row {
-                Icon(imageVector = Icons.Default.LocationOn, contentDescription = "")
+                Icon(imageVector = Icons.Default.LocationOn, contentDescription = null)
                 Text(text = "Plantel de inscripción", modifier.padding(start = 8.dp))
             }
             GetCampus()
+        }
+
+        Column(
+            modifier
+                .padding(8.dp)
+                .constrainAs(txtOferta) {
+                    start.linkTo(parent.start)
+                    top.linkTo(txtCampusQuestión.bottom)
+                }) {
+            Row {
+                Icon(imageVector = Icons.Default.HistoryEdu, contentDescription = null)
+                Text(text = "Licenciaturas del plantel", modifier.padding(start = 8.dp))
+            }
+            GetCampusDocument()
         }
 
         Box(modifier = modifier
@@ -113,7 +131,7 @@ fun ScreenBachelorsContent(
                 end.linkTo(parent.end)
                 top.linkTo(txtCampusQuestión.bottom)
             }) {
-
+            // GetOfertaAcademica()
         }
     }
 }

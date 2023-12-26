@@ -7,20 +7,17 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.merlinproject.common.Resource
 
 @Composable
-fun GetCampus(mViewModel: BachelorsViewModel = hiltViewModel()) {
-    when (val campus = mViewModel.campusResponse) {
+fun GetOfertaAcademica(mViewModel: BachelorsViewModel = hiltViewModel()) {
+    when (val campus = mViewModel.ofertaResponse) {
         is Resource.Failure -> {
-            Toast.makeText(LocalContext.current, "Ocurrio un error", Toast.LENGTH_SHORT).show()
+            Toast.makeText(LocalContext.current, "ocurrio un error", Toast.LENGTH_SHORT).show()
         }
-
         Resource.Loading -> {
-            // TODO: Animacion de carga de información
+            // TODO: poner un progrees bar
         }
-
         is Resource.Success -> {
-            ColumnCampus(campus = campus.data)
-        }
 
+        }
         null -> TODO()
     }
 }
