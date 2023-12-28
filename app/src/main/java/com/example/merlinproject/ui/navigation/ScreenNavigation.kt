@@ -7,6 +7,7 @@ import com.example.merlinproject.ui.navigation.RoutesLoginAndRegister.WELCOME_SC
 import com.example.merlinproject.ui.navigation.RoutesNavigationDrawer.AGENDA_NAVIGATION_ROUTE_NAME
 import com.example.merlinproject.ui.navigation.RoutesNavigationDrawer.BACHELORS_SCREEN_ROUTE_NAME
 import com.example.merlinproject.ui.navigation.RoutesNavigationDrawer.CALENDAR_NAVIGATION_ROUTE_NAME
+import com.example.merlinproject.ui.navigation.RoutesNavigationDrawer.CAMPUS_MAPS_ROUTE_NAME
 import com.example.merlinproject.ui.navigation.RoutesNavigationDrawer.CURSES_NAVIGATION_ROUTE_NAME
 import com.example.merlinproject.ui.navigation.RoutesNavigationDrawer.FORGET_PASSWORD_NAVIGATION_ROUTE_NAME
 import com.example.merlinproject.ui.navigation.RoutesNavigationDrawer.HELP_AND_QUESTION_NAVIGATION_ROUTE_NAME
@@ -26,13 +27,13 @@ import com.example.merlinproject.ui.navigation.SplashScreen.SPLASH_SCREEN
 sealed class ScreensNavigation(val route: String) {
 
     object SplashScreen : ScreensNavigation(SPLASH_SCREEN_ROUTE_NAME)
-    object WelcomeScreen: ScreensNavigation(WELCOME_SCREEN_NAVIGATION_ROUTE_NAME)
+    object WelcomeScreen : ScreensNavigation(WELCOME_SCREEN_NAVIGATION_ROUTE_NAME)
     object OnboardingScreen : ScreensNavigation(ONBOARDING_NAVIGATION_ROUTE_NAME)
-    object LoginScreen: ScreensNavigation(LOGIN_NAVIGATION_ROUTE_NAME)
-    object RegisterScreen: ScreensNavigation(REGISTER_NAVIGATION_ROUTE_NAME)
-    object ForgetPasswordScreen: ScreensNavigation(FORGET_PASSWORD_NAVIGATION_ROUTE_NAME)
-    object BachelorsScreen: ScreensNavigation(BACHELORS_SCREEN_ROUTE_NAME)
-
+    object LoginScreen : ScreensNavigation(LOGIN_NAVIGATION_ROUTE_NAME)
+    object RegisterScreen : ScreensNavigation(REGISTER_NAVIGATION_ROUTE_NAME)
+    object ForgetPasswordScreen : ScreensNavigation(FORGET_PASSWORD_NAVIGATION_ROUTE_NAME)
+    object BachelorsScreen : ScreensNavigation(BACHELORS_SCREEN_ROUTE_NAME)
+    object MapsCampusScreen : ScreensNavigation(CAMPUS_MAPS_ROUTE_NAME)
     object HomeScreen : ScreensNavigation(HOME_NAVIGATION_ROUTE_NAME)
     object AgendaScreen : ScreensNavigation(AGENDA_NAVIGATION_ROUTE_NAME)
     object CalendarScreen : ScreensNavigation(CALENDAR_NAVIGATION_ROUTE_NAME)
