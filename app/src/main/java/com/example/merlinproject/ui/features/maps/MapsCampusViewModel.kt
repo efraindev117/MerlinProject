@@ -16,7 +16,9 @@ import javax.inject.Inject
 class MapsCampusViewModel @Inject constructor(
     private val campusUsesCase: CampusUsesCase
 ) : ViewModel() {
+
     var campusResponse by mutableStateOf<Resource<List<CampusModel>>?>(null)
+
     fun getCampus() = viewModelScope.launch {
         campusResponse = Resource.Loading
         campusUsesCase.getCampusByName().collect() { campusList ->

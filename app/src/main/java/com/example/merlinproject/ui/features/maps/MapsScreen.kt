@@ -18,12 +18,11 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 
-
 @Composable
 fun MapsScreen(
     navHostController: NavHostController,
     mapsCampusViewModel: MapsCampusViewModel = hiltViewModel()
-){
+) {
     CampusMaps()
 }
 
@@ -38,8 +37,10 @@ fun CampusMaps() {
     }
 
     val singapore = LatLng(19.4326, -99.1332)
+    val uacmCuautepec = LatLng(19.5556583, -99.1451107)
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(singapore, 10f)
+        position = CameraPosition.fromLatLngZoom(uacmCuautepec, 10f)
     }
 
     GoogleMap(
@@ -52,6 +53,11 @@ fun CampusMaps() {
             state = MarkerState(position = singapore),
             title = "Hola mundo desde Mexico",
             snippet = "Subtitulo de la tarjeta"
+        )
+        Marker(
+            state = MarkerState(position = uacmCuautepec),
+            title = "UACM",
+            snippet = "Plantel Cuautepec"
         )
     }
     // TODO: crear marcas para cada diferente plantel de la uacm

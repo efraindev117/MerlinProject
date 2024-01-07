@@ -28,14 +28,9 @@ fun WelcomeScreen(navHostController: NavHostController) {
         ConstraintLayout(modifier = Modifier.fillMaxSize()) {
             val (buttonGoToLogin, buttonGoToRegister) = createRefs()
             val bottomGuide = createGuidelineFromBottom(.2f)
-
             Button(
                 onClick = { navHostController.navigate(ScreensNavigation.LoginScreen.route) },
                 shape = MaterialTheme.shapes.extraSmall,
-                colors = ButtonDefaults.buttonColors(
-                    contentColor = Color.White,
-                    containerColor = Color.Black
-                ),
                 modifier = Modifier
                     .width(220.dp)
                     .constrainAs(buttonGoToLogin) {
@@ -59,7 +54,7 @@ fun WelcomeScreen(navHostController: NavHostController) {
                         top.linkTo(buttonGoToLogin.bottom)
                     }
             ) {
-                Text(text = "Registrarme", color = Color.Black)
+                Text(text = "Registrarme")
             }
 
         }

@@ -2,7 +2,6 @@ package com.example.merlinproject.ui.features.bachelors
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,8 +16,6 @@ import com.example.merlinproject.domain.model.campus.DocumentModel
 import com.example.merlinproject.domain.model.campus.OfertaAcademica
 import com.example.merlinproject.domain.usescase.campus.CampusUsesCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,7 +23,6 @@ import javax.inject.Inject
 class BachelorsViewModel @Inject constructor(
     private val campusUsesCase: CampusUsesCase
 ) : ViewModel() {
-
     var campusResponse by mutableStateOf<Resource<List<CampusModel>>?>(null)
     var ofertaResponse by mutableStateOf<Resource<List<OfertaAcademica>>?>(null)
     var documentResponse by mutableStateOf<Resource<DocumentModel?>?>(null)
@@ -79,7 +75,7 @@ class BachelorsViewModel @Inject constructor(
             ofertaResponse = it
         }
     }
-
+    
     init {
         getCampus()
         getOfertas()

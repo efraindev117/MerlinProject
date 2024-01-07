@@ -36,11 +36,11 @@ fun GetCampus(mViewModel: BachelorsViewModel = hiltViewModel()) {
                             mViewModel.getDocumentSanLorenzo()
                         }
 
-                        104 -> {
+                        105 -> {
                             mViewModel.getDocumentCentro()
                         }
 
-                        105 -> {
+                        104 -> {
                             mViewModel.getDocumentCasaLibertad()
                         }
                     }

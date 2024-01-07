@@ -1,6 +1,4 @@
 package com.example.merlinproject.data.repository
-
-import android.util.Log
 import com.example.merlinproject.common.Constants.HUMANIDADES_Y_CIENCIAS_SOCIALES
 import com.example.merlinproject.common.Constants.OFERTA_FIREBASE
 import com.example.merlinproject.common.Constants.SUBCOLLECTION

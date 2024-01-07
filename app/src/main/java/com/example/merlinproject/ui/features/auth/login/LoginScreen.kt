@@ -198,10 +198,6 @@ fun ScreenContent(
             },
             enabled = mViewModel.isEnableFirebaseLoginButton,
             shape = MaterialTheme.shapes.extraSmall,
-            colors = ButtonDefaults.buttonColors(
-                contentColor = Color.White,
-                containerColor = Color.Black
-            ),
             modifier = Modifier
                 .padding(top = 32.dp)
                 .width(220.dp)

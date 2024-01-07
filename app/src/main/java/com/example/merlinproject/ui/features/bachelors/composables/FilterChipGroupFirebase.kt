@@ -2,6 +2,8 @@ package com.example.merlinproject.ui.features.bachelors.composables
 
 import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,6 +17,8 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SelectableChipBorder
+import androidx.compose.material3.SelectableChipColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,6 +27,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextOverflow
@@ -33,7 +38,7 @@ import com.example.merlinproject.domain.model.campus.CampusModel
 @Composable
 fun FilterChipGroupFirebase(
     items: List<CampusModel>,
-    defaultSelectedItemIndex: Int = 0,
+    defaultSelectedItemIndex: Int = 101,
     selectedItemIcon: ImageVector = Icons.Default.Done,
     onSelectedChanged: (Int) -> Unit = {},
     onClickCampus: (Int) -> Unit = {}
@@ -53,18 +58,20 @@ fun FilterChipGroupFirebase(
                         modifier = Modifier
                             .graphicsLayer(alpha = alpha)
                             .padding(start = 6.dp),
-                        selected = selectedItemIndex == data.id && expanded,
+                        selected =  selectedItemIndex == data.id,
                         onClick = {
                             selectedItemIndex = data.id
                             onSelectedChanged(data.id)
                             onClickCampus(data.id)
-                            Log.d("click", "${data}")
+                            Log.d("chips","$onClickCampus")
+                            Log.d("chips","$selectedItemIndex")
                         },
                         label = {
                             Text(
                                 text = data.name,
-                                color = MaterialTheme.colorScheme.onSurface,
-                                overflow = TextOverflow.Ellipsis
+                                overflow = TextOverflow.Ellipsis,
+                                maxLines = 1,
+                                style = MaterialTheme.typography.bodyMedium
                             )
                         },
                         leadingIcon = if (selectedItemIndex == data.id && expanded) {
@@ -83,36 +90,5 @@ fun FilterChipGroupFirebase(
             }
         }
     }
-    /*  LazyRow(userScrollEnabled = true) {
-          items(items.size) { index: Int ->
-              FilterChip(
-                  modifier = Modifier.padding(end = 6.dp),
-                  selected = items[selectedItemIndex] == items[index],
-                  onClick = {
-                      selectedItemIndex = index
-                      onSelectedChanged(index)
-                      Log.d("Chipfilter","Tocado $index")
-                  },
-                  label = { Text( "${items[4].ofertaAcademica[0]} + \"${items[index].id}") },
-                  leadingIcon = if (items[selectedItemIndex] == items[index]) {
-                      {
-                          Icon(
-                              imageVector = selectedItemIcon,
-                              contentDescription = "Localized Description",
-                              modifier = Modifier.size(FilterChipDefaults.IconSize)
-                          )
-                      }
-                  } else {
-                      {
-                          Icon(
-                              imageVector = itemIcon,
-                              contentDescription = "Localized description",
-                              modifier = Modifier.size(FilterChipDefaults.IconSize)
-                          )
-                      }
-                  }
-              )
-          }
-      }*/
 }
 

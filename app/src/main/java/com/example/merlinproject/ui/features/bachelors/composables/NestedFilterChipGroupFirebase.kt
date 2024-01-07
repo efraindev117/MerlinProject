@@ -1,5 +1,6 @@
 package com.example.merlinproject.ui.features.bachelors.composables
 
+import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -33,8 +34,6 @@ fun NestedFilterChipGroupFirebase(
 ) {
     var selectedItemIndex by remember { mutableIntStateOf(defaultSelectedItemIndex) }
     var expanded by remember { mutableStateOf(true) }
-    val alpha: Float by animateFloatAsState(if (expanded) 1f else 0.5f, label = "")
-
 
     LazyColumn(userScrollEnabled = false) {
         items(items.studios_list.size) { index: Int ->
@@ -45,9 +44,12 @@ fun NestedFilterChipGroupFirebase(
                     selectedItemIndex = index
                     onSelectedChanged(index)
                     onClickCampus(index)
+                    Log.d("chips","$onClickCampus")
+                    Log.d("chips","${items.studios_list[index].academy}")
+                    Log.d("chips","${items.studios_list[index]}")
                 },
                 label = { Text(items.studios_list[index].academy) },
-                leadingIcon = if (selectedItemIndex == items.studios_list.size && expanded) {
+                leadingIcon = if (selectedItemIndex == index && expanded) {
                     {
                         Icon(
                             imageVector = selectedItemIcon,

@@ -14,6 +14,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.HistoryEdu
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -49,7 +51,12 @@ fun BachelorsScreen(
     Scaffold(
         modifier = modifier,
         topBar = {
-            TopAppBar(title = { Text(text = stringResource(id = R.string.bachelors_screen_title)) })
+            TopAppBar(title = {
+                Text(
+                    text = stringResource(id = R.string.bachelors_screen_title),
+                    style = MaterialTheme.typography.headlineSmall
+                )
+            })
         }
     ) { paddingValues ->
         ScreenBachelorsContent(modifier, paddingValues)
@@ -60,12 +67,12 @@ fun BachelorsScreen(
 fun ScreenBachelorsContent(
     modifier: Modifier,
     paddingValues: PaddingValues,
-    mViewModel: BachelorsViewModel = hiltViewModel()
 ) {
     ConstraintLayout(
         modifier
             .fillMaxSize()
             .padding(paddingValues)
+
     ) {
         val (lazyCampus,
             txtCampusQuestión,
@@ -75,29 +82,29 @@ fun ScreenBachelorsContent(
         val guidelineMedium = createGuidelineFromTop(.3f)
         val guidelineEnd = createGuidelineFromTop(.5f)
 
-
-        Card(modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp)
-            .height(60.dp)
-            .constrainAs(cardWithMessage) {
-                top.linkTo(parent.top)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-            }) {
+        ElevatedCard(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp)
+                .constrainAs(cardWithMessage) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                },
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)
+        ) {
             Row(modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                 Icon(imageVector = labelImportantDefault, contentDescription = null)
                 Text(
                     modifier = modifier.padding(start = 8.dp),
                     text = stringResource(id = R.string.bachelors_card_msg),
-                    style = MaterialTheme.typography.bodySmall,
-                    fontWeight = FontWeight.Bold
+                    style = MaterialTheme.typography.bodyMedium,
                 )
             }
         }
 
         Column(modifier = modifier
-            .padding(8.dp)
+            .padding(16.dp)
             .constrainAs(txtCampusQuestión) {
                 top.linkTo(cardWithMessage.bottom)
                 start.linkTo(parent.start)
@@ -106,25 +113,33 @@ fun ScreenBachelorsContent(
         ) {
             Row {
                 Icon(imageVector = Icons.Default.LocationOn, contentDescription = null)
-                Text(text = "Plantel de inscripción", modifier.padding(start = 8.dp))
+                Text(
+                    text = "Plantel de inscripcion",
+                    modifier.padding(start = 8.dp),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold
+                )
             }
             GetCampus()
         }
-
         Column(
             modifier
-                .padding(8.dp)
+                .padding(start = 16.dp)
                 .constrainAs(txtOferta) {
                     start.linkTo(parent.start)
                     top.linkTo(txtCampusQuestión.bottom)
                 }) {
             Row {
                 Icon(imageVector = Icons.Default.HistoryEdu, contentDescription = null)
-                Text(text = "Licenciaturas del plantel", modifier.padding(start = 8.dp))
+                Text(
+                    text = "Academías",
+                    modifier.padding(start = 8.dp),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold
+                )
             }
             GetCampusDocument()
         }
-
         Box(modifier = modifier
             .constrainAs(lazyCampus) {
                 start.linkTo(parent.start)

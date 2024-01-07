@@ -39,6 +39,7 @@ import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Policy
 import androidx.compose.material.icons.outlined.School
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.Warning
 
 object MerlinProjectIcons {
     val emailFilled = Icons.Filled.Mail
@@ -81,5 +82,5 @@ object MerlinProjectIcons {
     val checkIconOk = Icons.Filled.CheckCircle
     val checkIconError = Icons.Filled.Error
     val usernameIcon = Icons.Outlined.Face
-    val labelImportantDefault = Icons.Outlined.LabelImportant
+    val labelImportantDefault = Icons.Outlined.Warning
 }

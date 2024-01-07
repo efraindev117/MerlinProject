@@ -9,11 +9,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.merlinproject.ui.features.auth.login.LoginScreen
 import com.example.merlinproject.ui.features.bachelors.BachelorsScreen
+import com.example.merlinproject.ui.features.maps.MapsCampusListScreen
 import com.example.merlinproject.ui.features.maps.MapsScreen
 import com.example.merlinproject.ui.navigation.NestedNavigation
 import com.example.merlinproject.ui.theme.MerlinProjectTheme
@@ -30,14 +32,15 @@ class MainActivity : ComponentActivity() {
             MerlinProjectTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    tonalElevation = 5.dp
                 ) {
                     navController = rememberNavController()
                     //NestedNavigation(navController = navController)
                     //RegisterScreen(navHostController = navController )
-                    LoginScreen(navHostController = navController)
+                    //LoginScreen(navHostController = navController)
                     //BachelorsScreen(navHostController = navController)
-                    MapsScreen(navController)
+                    //MapsScreen(navController)
+                    //MapsCampusListScreen(navHostController = navController)
                 }
             }
         }
