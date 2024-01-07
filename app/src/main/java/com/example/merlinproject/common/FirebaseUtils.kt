@@ -1,4 +1,4 @@
-package com.example.merlinproject.data
+package com.example.merlinproject.common
 
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.suspendCancellableCoroutine

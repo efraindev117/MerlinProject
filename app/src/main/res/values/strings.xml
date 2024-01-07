@@ -1,3 +1,42 @@
 <resources>
     <string name="app_name">Merlin Project</string>
+
+
+    <!-- login screen -->
+    <string name="login_screen_title">Iniciar sesión</string>
+    <string name="login_screen_email_text_field_label">Email</string>
+    <string name="login_screen_email_text_field_msg">Correo eléctronico</string>
+    <string name="login_screen_email_text_field_error_msg">Correo no válido</string>
+    <string name="login_screen_email_text_field_success_msg">Correo válido</string>
+    <string name="login_screen_password_text_field_label">Contraseña</string>
+    <string name="login_screen_password_text_field_msg">Debe ser mayor a 6 carácteres</string>
+    <string name="login_screen_password_text_field_error_msg">La contraseña es muy corta</string>
+    <string name="login_screen_password_text_field_success_msg">Contraseña válida</string>
+    <string name="login_screen_title_button">Entrar</string>
+    <string name="login_screen_title_Google_button">Continue with Google</string>
+    <string name="login_screen_title_text_button">No tienes una cuenta? Registrate!</string>
+    <string name="login_screen_social_txt">Inicio con redes sociales</string>
+    <string name="login_screen_social_txt_ing">Sign In with Social networks</string>
+
+    <!-- register screen -->
+    <string name="register_screen_title">Registro</string>
+    <string name="register_screen_username_text_field_label">Nombre</string>
+    <string name="register_screen_email_text_field_label">Email</string>
+    <string name="register_screen_email_text_field_msg">Correo eléctronico</string>
+    <string name="register_screen_email_text_field_error_msg">Correo no válido</string>
+    <string name="register_screen_email_text_field_success_msg">Correo válido</string>
+    <string name="register_screen_password_text_field_label">Contraseña</string>
+    <string name="register_screen_password_text_field_msg">Debe ser mayor a 6 carácteres</string>
+    <string name="register_screen_password_text_field_error_msg">La contraseña es muy corta</string>
+    <string name="register_screen_password_text_field_success_msg">Contraseña válida</string>
+    <string name="register_screen_title_button">Entrar</string>
+    <string name="register_screen_title_Google_button">Continue with Google</string>
+    <string name="register_screen_title_text_button">Ya tienes una cuenta? Inicia sesión!</string>
+    <string name="register_screen_social_txt">Registro con redes sociales</string>
+    <string name="register_screen_social_txt_ing">Sign In with Social networks</string>
+
+    <!-- Bachelors screen -->
+    <string name="bachelors_screen_title">Bienvenido a Dayli UACM</string>
+    <string name="bachelors_card_msg">La información mostrada es obtenida de www.uacm.edu.mx</string>
+
 </resources>
