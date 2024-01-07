@@ -4,11 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.merlinproject.ui.features.auth.welcome.WelcomeScreen
 import com.example.merlinproject.ui.features.auth.login.LoginScreen
 import com.example.merlinproject.ui.features.auth.register.RegisterScreen
+import com.example.merlinproject.ui.features.auth.welcome.WelcomeScreen
 import com.example.merlinproject.ui.features.bachelors.BachelorsScreen
-import com.example.merlinproject.ui.features.maps.MapsCampusListScreen
 import com.example.merlinproject.ui.features.maps.MapsScreen
 
 @Composable
@@ -30,8 +29,8 @@ fun NestedNavigation(navController: NavHostController) {
             BachelorsScreen(navHostController = navController)
         }
         composable(route = ScreensNavigation.MapsCampusScreen.route) {
-            // MapsScreen(navHostController = navController)
-            MapsCampusListScreen(navHostController = navController)
+            MapsScreen(navHostController = navController)
+            //MapsCampusListScreen(navHostController = navController)
         }
     }
 }
