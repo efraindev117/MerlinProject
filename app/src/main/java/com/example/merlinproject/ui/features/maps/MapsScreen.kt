@@ -51,8 +51,8 @@ fun CampusMaps() {
     ) {
         Marker(
             state = MarkerState(position = singapore),
-            title = "Hola mundo desde Mexico",
-            snippet = "Subtitulo de la tarjeta"
+            title = "Uacm campus Mexico",
+            snippet = "uacm subtitulo"
         )
         Marker(
             state = MarkerState(position = uacmCuautepec),

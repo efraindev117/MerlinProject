@@ -29,6 +29,7 @@ fun NestedNavigation(navController: NavHostController) {
             BachelorsScreen(navHostController = navController)
         }
         composable(route = ScreensNavigation.MapsCampusScreen.route) {
+
             MapsScreen(navHostController = navController)
             //MapsCampusListScreen(navHostController = navController)
         }
