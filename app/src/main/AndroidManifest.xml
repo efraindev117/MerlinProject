@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
-        android:name=".ui.utils.MerlinProjectApp"
+        android:name=".ui.utils.application.MerlinProjectApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,8 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MerlinProject"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD-XE9BuNwYzxfF4yo5Sq-xwafQ7ZBqwxA" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.utils.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MerlinProject">
