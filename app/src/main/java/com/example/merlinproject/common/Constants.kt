@@ -3,6 +3,7 @@ package com.example.merlinproject.common
 object Constants {
     const val USERS_FIREBASE = "Users"
     const val CAMPUS_FIREBASE = "Plantel"
+    const val LIC_FIREBASE = "licenciautura"
     const val OFERTA_FIREBASE = "B5PooXkWHtuB5EZTpnG7"
     const val SUBCOLLECTION = "ofertaAcademica"
     const val HUMANIDADES_Y_CIENCIAS_SOCIALES = "humanidadesYCienciasSociales"

@@ -1,6 +1,7 @@
 package com.example.merlinproject.data.di
 
 import com.example.merlinproject.common.Constants.CAMPUS_FIREBASE
+import com.example.merlinproject.common.Constants.LIC_FIREBASE
 import com.example.merlinproject.common.Constants.USERS_FIREBASE
 import com.example.merlinproject.domain.repository.IFirebaseAuthRepository
 import com.example.merlinproject.domain.repository.IFirebaseCampusRepository
@@ -20,6 +21,7 @@ import com.example.merlinproject.domain.usescase.users.UsersUsesCase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.Module
@@ -35,6 +37,10 @@ annotation class UsersCollection
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class PlantelCollection
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class LicenciaturaCollection
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -58,6 +64,11 @@ object AppModule {
     @PlantelCollection
     fun providePlantelCollection(db: FirebaseFirestore):
             CollectionReference = db.collection(CAMPUS_FIREBASE)
+
+    @Provides
+    @LicenciaturaCollection
+    fun provideLicenciaturaCollection(db: FirebaseFirestore):
+            Query = db.collection(LIC_FIREBASE).whereEqualTo("campus", "alfa")
 
     //uses case
     @Provides
