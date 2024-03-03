@@ -1,6 +1,7 @@
 package com.example.merlinproject.ui.features.auth.login
 
 import TextFieldMerlin
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -11,10 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AlternateEmail
 import androidx.compose.material.icons.filled.Key
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -50,7 +49,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.merlinproject.R
 import com.example.merlinproject.common.Resource
-import com.example.merlinproject.ui.navigation.ScreensNavigation
+import com.example.merlinproject.ui.navigation.graph.AuthScreen
+import com.example.merlinproject.ui.navigation.graph.Graph
+import com.example.merlinproject.ui.navigation.graph.RootScreen
 import com.example.merlinproject.ui.theme.MerlinProjectIcons
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.cancelFilled
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.navigateToBack
@@ -69,7 +70,7 @@ fun LoginScreen(
             TopAppBar(
                 title = { Text(text = stringResource(id = R.string.login_screen_title)) },
                 navigationIcon = {
-                    IconButton(onClick = { navHostController.navigate(ScreensNavigation.WelcomeScreen.route) }) {
+                    IconButton(onClick = { navHostController.navigate(AuthScreen.WelcomeScreen.route) }) {
                         Icon(imageVector = navigateToBack, contentDescription = "Navigate To Back")
                     }
                 },
@@ -247,7 +248,7 @@ fun ScreenContent(
         }
 
         TextButton(
-            onClick = { navHostController.navigate(ScreensNavigation.RegisterScreen.route) },
+            onClick = { navHostController.navigate(AuthScreen.RegisterScreen.route) },
             modifier.constrainAs(btnTextRegister) {
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
@@ -260,8 +261,6 @@ fun ScreenContent(
                 textDecoration = TextDecoration.Underline
             )
         }
-
-
     }
     mViewModel.loginFlow.collectAsState().value?.let { resourceState ->
         when (resourceState) {
@@ -276,16 +275,18 @@ fun ScreenContent(
 
             is Resource.Success -> {
                 LaunchedEffect(Unit) {
-                    navHostController.navigate(ScreensNavigation.BachelorsScreen.route) {
+                    navHostController.navigate(route = Graph.HOME) {
                         //Eliminar el screen anterior
-                        popUpTo(ScreensNavigation.LoginScreen.route) { inclusive = true }
+                        popUpTo(Graph.AUTH) { inclusive = true }
                         // TODO: hacer lo mismo pero en la pantalla del registro.
                     }
                 }
             }
 
             is Resource.Failure -> {
-                // TODO: con este vamos a probar la peticion a firebase
+                Toast.makeText(LocalContext.current, resourceState.toString(), Toast.LENGTH_SHORT)
+                    .show()
+                Log.d("FirebaseResponse", "${resourceState}")
             }
         }
     }

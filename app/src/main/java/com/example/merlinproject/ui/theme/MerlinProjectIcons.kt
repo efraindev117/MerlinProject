@@ -15,8 +15,10 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Key
 import androidx.compose.material.icons.filled.LabelImportant
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Mail
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.PinDrop
 import androidx.compose.material.icons.filled.Policy
 import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.Settings
@@ -83,4 +85,7 @@ object MerlinProjectIcons {
     val checkIconError = Icons.Filled.Error
     val usernameIcon = Icons.Outlined.Face
     val labelImportantDefault = Icons.Outlined.Warning
+
+    //Campus location scren
+    val LocationCampusIcon = Icons.Default.LocationOn
 }

@@ -2,6 +2,13 @@
     <string name="app_name">Merlin Project</string>
 
 
+    <string name="title_navigation_drawer">Daily Uacm</string>
+
+
+    <!-- icons default -->
+    <string name="icons_default_description">Icono sin acción en la ui</string>
+
+
     <!-- login screen -->
     <string name="login_screen_title">Iniciar sesión</string>
     <string name="login_screen_email_text_field_label">Email</string>
@@ -38,5 +45,9 @@
     <!-- Bachelors screen -->
     <string name="bachelors_screen_title">Bienvenido a Dayli UACM</string>
     <string name="bachelors_card_msg">La información mostrada es obtenida de www.uacm.edu.mx</string>
+    <string name="title_home_navigation">Home\n\t</string>
+
+
+    <string name="card_addres_demo">Fray Servando Teresa de Mier 92 y 99 Col. Obrera, Alcaldía Cuauhtémoc06080 Ciudad de México México</string>
 
 </resources>

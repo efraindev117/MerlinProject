@@ -12,7 +12,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.merlinproject.ui.navigation.NestedNavigation
+import com.example.merlinproject.ui.navigation.composable.NavigationMD3
+import com.example.merlinproject.ui.navigation.graph.RootNavGraph
 import com.example.merlinproject.ui.theme.MerlinProjectTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,22 +25,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MerlinProjectTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    tonalElevation = 5.dp
-                ) {
                     navController = rememberNavController()
-                    NestedNavigation(navController = navController)
-                }
+                    RootNavGraph(navController = navController)
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MerlinProjectTheme {
-        Log.d("Hola", "Mundo")
     }
 }

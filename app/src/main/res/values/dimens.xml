@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="height_min_material">8.dp</dimen>
+    <dimen name="width_min_material">8.dp</dimen>
+    <dimen name="height_medium_material">16.dp</dimen>
+    <dimen name="width_medium_material">16.dp</dimen>
+    <dimen name="height_max_material">32.dp</dimen>
+    <dimen name="width_max_material">32.dp</dimen>
+
+
+
+    <dimen name="padding_min_material">8.dp</dimen>
+    <dimen name="padding_medium_material">16.dp</dimen>
+    <dimen name="padding_max_material">32.dp</dimen>
+</resources>

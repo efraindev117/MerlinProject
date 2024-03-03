@@ -44,7 +44,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.merlinproject.R
 import com.example.merlinproject.common.Resource
-import com.example.merlinproject.ui.navigation.ScreensNavigation
+import com.example.merlinproject.ui.navigation.graph.AuthScreen
 import com.example.merlinproject.ui.theme.MerlinProjectIcons
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,7 +59,7 @@ fun RegisterScreen(
             TopAppBar(
                 title = { Text(text = stringResource(id = R.string.register_screen_title)) },
                 navigationIcon = {
-                    IconButton(onClick = { navHostController.navigate(ScreensNavigation.WelcomeScreen.route) }) {
+                    IconButton(onClick = { navHostController.navigate(AuthScreen.WelcomeScreen.route) }) {
                         Icon(
                             imageVector = MerlinProjectIcons.navigateToBack,
                             contentDescription = "Navigate To Back"
@@ -304,10 +304,11 @@ fun ScreenRegisterContent(
             is Resource.Success -> {
                 LaunchedEffect(Unit) {
                     mViewModel.createUser()
-                    navHostController.popBackStack(ScreensNavigation.RegisterScreen.route,
+                    navHostController.popBackStack(
+                        AuthScreen.RegisterScreen.route,
                         true
                     )
-                    navHostController.navigate(ScreensNavigation.BachelorsScreen.route)
+                   // navHostController.navigate(AuthScreen.BachelorsScreen.route)
                 }
             }
 
