@@ -7,6 +7,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -51,12 +52,12 @@ import com.example.merlinproject.R
 import com.example.merlinproject.common.Resource
 import com.example.merlinproject.ui.navigation.graph.AuthScreen
 import com.example.merlinproject.ui.navigation.graph.Graph
-import com.example.merlinproject.ui.navigation.graph.RootScreen
 import com.example.merlinproject.ui.theme.MerlinProjectIcons
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.cancelFilled
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.navigateToBack
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.visibilityFilled
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.visibilityOffFilled
+import com.example.merlinproject.ui.theme.lexendFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -68,7 +69,13 @@ fun LoginScreen(
         modifier = modifier,
         topBar = {
             TopAppBar(
-                title = { Text(text = stringResource(id = R.string.login_screen_title)) },
+                title = {
+                    Text(
+                        text = stringResource(id = R.string.login_screen_title),
+                        fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Bold
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = { navHostController.navigate(AuthScreen.WelcomeScreen.route) }) {
                         Icon(imageVector = navigateToBack, contentDescription = "Navigate To Back")
@@ -105,7 +112,7 @@ fun ScreenContent(
         //Email
         TextFieldMerlin(
             modifier = Modifier
-                .width(280.dp)
+                .padding(16.dp)
                 .constrainAs(textFieldEmailAndPassword) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -121,9 +128,17 @@ fun ScreenContent(
                     } else {
                         mViewModel.emailErrMsg.value
                     }
-                    Text(text = message)
+                    Text(
+                        text = message,
+                        fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Light
+                    )
                 } else {
-                    Text(text = stringResource(id = R.string.login_screen_email_text_field_msg))
+                    Text(
+                        text = stringResource(id = R.string.login_screen_email_text_field_msg),
+                        fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Light
+                    )
                 }
             },
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email),
@@ -148,8 +163,8 @@ fun ScreenContent(
         //Password
         TextFieldMerlin(
             modifier = Modifier
-                .width(280.dp)
-                .padding(top = 32.dp)
+                .fillMaxWidth()
+                .padding(16.dp)
                 .constrainAs(textFieldPassword) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -185,9 +200,16 @@ fun ScreenContent(
                     } else {
                         mViewModel.passwordErrMsg.value
                     }
-                    Text(text = message)
+                    Text(
+                        text = message, fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Light
+                    )
                 } else {
-                    Text(text = stringResource(id = R.string.login_screen_password_text_field_label))
+                    Text(
+                        text = stringResource(id = R.string.login_screen_password_text_field_label),
+                        fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Light
+                    )
                 }
             },
         )
@@ -208,11 +230,17 @@ fun ScreenContent(
                     top.linkTo(textFieldPassword.bottom)
                 }
         ) {
-            Text(text = stringResource(id = R.string.login_screen_title_button))
+            Text(
+                text = stringResource(id = R.string.login_screen_title_button),
+                fontFamily = lexendFontFamily,
+                fontWeight = FontWeight.SemiBold
+            )
         }
 
         Text(
             text = stringResource(id = R.string.login_screen_social_txt_ing),
+            fontFamily = lexendFontFamily,
+            fontWeight = FontWeight.Normal,
             style = MaterialTheme.typography.bodySmall,
             modifier = modifier.constrainAs(txtSocialNetwork) {
                 start.linkTo(parent.start)
@@ -243,7 +271,8 @@ fun ScreenContent(
             Text(
                 text = stringResource(id = R.string.login_screen_title_Google_button),
                 style = MaterialTheme.typography.bodyLarge,
-                fontWeight = FontWeight.Normal, color = MaterialTheme.colorScheme.onSurface
+                fontWeight = FontWeight.Normal,
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
 
@@ -256,6 +285,8 @@ fun ScreenContent(
             }) {
             Text(
                 text = stringResource(id = R.string.login_screen_title_text_button),
+                fontFamily = lexendFontFamily,
+                fontWeight = FontWeight.SemiBold,
                 color = Color.Black,
                 fontStyle = FontStyle.Normal,
                 textDecoration = TextDecoration.Underline
@@ -275,6 +306,7 @@ fun ScreenContent(
 
             is Resource.Success -> {
                 LaunchedEffect(Unit) {
+                    navHostController.popBackStack()
                     navHostController.navigate(route = Graph.HOME) {
                         //Eliminar el screen anterior
                         popUpTo(Graph.AUTH) { inclusive = true }
@@ -291,4 +323,3 @@ fun ScreenContent(
         }
     }
 }
-

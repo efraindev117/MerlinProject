@@ -7,9 +7,13 @@
     <dimen name="height_max_material">32.dp</dimen>
     <dimen name="width_max_material">32.dp</dimen>
 
-
-
     <dimen name="padding_min_material">8.dp</dimen>
     <dimen name="padding_medium_material">16.dp</dimen>
     <dimen name="padding_max_material">32.dp</dimen>
+
+    <dimen name="map_size_circle">60.dp</dimen>
+    <dimen name="campus_card_elevation">2.dp</dimen>
+
+
+
 </resources>

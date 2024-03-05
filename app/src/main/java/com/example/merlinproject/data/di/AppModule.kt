@@ -1,11 +1,15 @@
 package com.example.merlinproject.data.di
 
+import com.example.merlinproject.common.Constants.CAMPUS_COLLECTION
 import com.example.merlinproject.common.Constants.CAMPUS_FIREBASE
 import com.example.merlinproject.common.Constants.LIC_FIREBASE
 import com.example.merlinproject.common.Constants.USERS_FIREBASE
 import com.example.merlinproject.domain.repository.IFirebaseAuthRepository
 import com.example.merlinproject.domain.repository.IFirebaseCampusRepository
 import com.example.merlinproject.domain.repository.IFirebaseUserRepository
+import com.example.merlinproject.domain.repository.INewCampusRepository
+import com.example.merlinproject.domain.usescase.NewCampusUsesCase
+import com.example.merlinproject.domain.usescase.NewGetCampus
 import com.example.merlinproject.domain.usescase.auth.login.AuthUsesCase
 import com.example.merlinproject.domain.usescase.auth.login.GetCurrentUser
 import com.example.merlinproject.domain.usescase.auth.login.Login
@@ -42,6 +46,10 @@ annotation class PlantelCollection
 @Retention(AnnotationRetention.BINARY)
 annotation class LicenciaturaCollection
 
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class NewCampusCollection
+
 @InstallIn(SingletonComponent::class)
 @Module
 object AppModule {
@@ -64,6 +72,11 @@ object AppModule {
     @PlantelCollection
     fun providePlantelCollection(db: FirebaseFirestore):
             CollectionReference = db.collection(CAMPUS_FIREBASE)
+
+    @Provides
+    @NewCampusCollection
+    fun provideNewCampusCollection(db: FirebaseFirestore):
+            CollectionReference = db.collection(CAMPUS_COLLECTION)
 
     @Provides
     @LicenciaturaCollection
@@ -90,5 +103,10 @@ object AppModule {
         getCampusByName = GetCampusByName(repository),
         getOferta = GetOferta(repository),
         getDocument = GetCampusDocument(repository)
+    )
+
+    @Provides
+    fun provideNewCampusUsesCase(repositoy: INewCampusRepository) = NewCampusUsesCase(
+        newGetCampus = NewGetCampus(repositoy)
     )
 }

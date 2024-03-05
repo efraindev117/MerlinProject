@@ -14,18 +14,14 @@ fun RootNavGraph(navController: NavHostController) {
         startDestination = Graph.AUTH
     ) {
         authNavGraph(navController)
-        composable(route = Graph.HOME){
+        composable(route = Graph.HOME) {
             HomeScreen()
         }
     }
 }
-
-sealed class RootScreen(val route : String) {
-    object Home: RootScreen(route = "home_route" )
-}
-
 object Graph {
-    const val  ROOT = "root_graph"
+    const val ROOT = "root_graph"
     const val AUTH = "auth_graph"
     const val HOME = "home_graph"
+    const val DETAILS = "details_graph"
 }

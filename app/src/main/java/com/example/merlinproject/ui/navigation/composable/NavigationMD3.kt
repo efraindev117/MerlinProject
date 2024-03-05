@@ -42,6 +42,7 @@ import com.example.merlinproject.ui.features.home.HomeScreen
 import com.example.merlinproject.ui.features.resume.ResumeScreen
 import com.example.merlinproject.ui.navigation.graph.HomeDrawerNavGraph
 import com.example.merlinproject.ui.navigation.graph.HomeDrawerScreen
+import com.example.merlinproject.ui.theme.lexendFontFamily
 import com.example.merlinproject.ui.utils.MerlinIcons.MenuIconMD3
 import kotlinx.coroutines.launch
 
@@ -63,11 +64,11 @@ fun NavigationMD3(navController: NavHostController) {
                 ModalDrawerSheet(modifier = Modifier.requiredWidth(300.dp)) {
                     Text(
                         text = stringResource(id = R.string.title_navigation_drawer),
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
+                        fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Light,
                         fontSize = 18.sp,
                         color = MaterialTheme.colorScheme.tertiary,
-                        modifier = Modifier.padding(16.dp)
+                        modifier = Modifier.padding(start = 32.dp, top = 16.dp, bottom = 16.dp)
                     )
                     Divider(
                         modifier = Modifier.fillMaxWidth()
@@ -76,18 +77,25 @@ fun NavigationMD3(navController: NavHostController) {
                     NavigationItems().bottomNavigationItems()
                         .forEachIndexed { index, items ->
                             NavigationDrawerItem(
-                                label = { Text(text = items.title!!) },
+                                label = {
+                                    Text(
+                                        text = items.title!!,
+                                        fontFamily = lexendFontFamily,
+                                        fontWeight = FontWeight.Normal,
+                                    )
+                                },
                                 selected = index == selectedItemIndex,
                                 onClick = {
                                     selectedItemIndex = index
-                                    scope.launch {
-                                        drawerState.close()
-                                    }
                                     navController.navigate(items.route) {
                                         popUpTo(navController.graph.findStartDestination().id) {
                                             saveState = true
                                         }
                                     }
+                                    scope.launch {
+                                        drawerState.close()
+                                    }
+
                                 },
                                 icon = {
                                     Icon(
@@ -111,7 +119,10 @@ fun NavigationMD3(navController: NavHostController) {
                     val titleResourceId = navigationItem.title
                     TopAppBar(
                         title = {
-                            Text(text = titleResourceId.toString())
+                            Text(
+                                text = titleResourceId.toString(), fontFamily = lexendFontFamily,
+                                fontWeight = FontWeight.Bold,
+                            )
                         },
                         navigationIcon = {
                             IconButton(onClick = {
@@ -124,7 +135,7 @@ fun NavigationMD3(navController: NavHostController) {
                 }
             }
             ) { paddingValues ->
-                HomeDrawerNavGraph(navHostController = navController,paddingValues)
+                HomeDrawerNavGraph(navHostController = navController, paddingValues)
             }
         }
     }

@@ -21,7 +21,8 @@ import com.example.merlinproject.ui.features.time.TimeScreen
 @Composable
 fun HomeDrawerNavGraph(
     navHostController: NavHostController,
-    paddingValues: PaddingValues) {
+    paddingValues: PaddingValues
+) {
     NavHost(
         navController = navHostController,
         route = Graph.HOME,
@@ -55,7 +56,7 @@ fun HomeDrawerNavGraph(
         }
 
         composable(route = HomeDrawerScreen.CampusScreen.route) {
-            CampusScreen(navController = navHostController)
+            CampusScreen(navController = navHostController, paddingValues = paddingValues)
         }
 
         composable(route = HomeDrawerScreen.HelperScreen.route) {
@@ -65,18 +66,20 @@ fun HomeDrawerNavGraph(
         composable(route = HomeDrawerScreen.ConfigScreen.route) {
             ConfigScreen(navController = navHostController)
         }
+
+        detailsNavGraph(navHostController)
     }
 }
 
-sealed class HomeDrawerScreen(val route: String){
-    object ResumeScreen: HomeDrawerScreen(route = "resume_screen")
-    object NotesScreen:HomeDrawerScreen(route = "notes_screen")
-    object TimeScreen:HomeDrawerScreen(route = "time_screen")
-    object CalendarScreen: HomeDrawerScreen(route = "calendar_screen")
-    object RatingsScreen: HomeDrawerScreen(route = "ratings_screen")
-    object SubjectScreen: HomeDrawerScreen(route = "subject_screen")
-    object TeachersScreen: HomeDrawerScreen(route = "teachers_screen")
-    object CampusScreen: HomeDrawerScreen(route = "campus_screen")
-    object HelperScreen: HomeDrawerScreen(route = "helper_screen")
-    object ConfigScreen: HomeDrawerScreen(route = "config_screen")
+sealed class HomeDrawerScreen(val route: String) {
+    object ResumeScreen : HomeDrawerScreen(route = "resume_screen")
+    object NotesScreen : HomeDrawerScreen(route = "notes_screen")
+    object TimeScreen : HomeDrawerScreen(route = "time_screen")
+    object CalendarScreen : HomeDrawerScreen(route = "calendar_screen")
+    object RatingsScreen : HomeDrawerScreen(route = "ratings_screen")
+    object SubjectScreen : HomeDrawerScreen(route = "subject_screen")
+    object TeachersScreen : HomeDrawerScreen(route = "teachers_screen")
+    object CampusScreen : HomeDrawerScreen(route = "campus_screen")
+    object HelperScreen : HomeDrawerScreen(route = "helper_screen")
+    object ConfigScreen : HomeDrawerScreen(route = "config_screen")
 }

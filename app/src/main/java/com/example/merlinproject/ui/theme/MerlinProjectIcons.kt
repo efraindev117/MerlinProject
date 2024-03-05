@@ -9,15 +9,20 @@ import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.ChecklistRtl
 import androidx.compose.material.icons.filled.ContactSupport
 import androidx.compose.material.icons.filled.DomainAdd
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Key
 import androidx.compose.material.icons.filled.LabelImportant
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Mail
+import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.PinDrop
 import androidx.compose.material.icons.filled.Policy
 import androidx.compose.material.icons.filled.School
@@ -88,4 +93,9 @@ object MerlinProjectIcons {
 
     //Campus location scren
     val LocationCampusIcon = Icons.Default.LocationOn
+    val MapsCampusIcon = Icons.Default.Map
+    val PhoneCampusIcon = Icons.Default.Phone
+    val EmailCampusIcon = Icons.Default.Email
+    val ExpandMoreCampusIcon = Icons.Default.ExpandMore
+    val ExpandLessCampusIcon = Icons.Default.ExpandLess
 }
