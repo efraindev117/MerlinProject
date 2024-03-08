@@ -1,20 +1,20 @@
 package com.example.merlinproject.ui.features.auth.login
 
 import TextFieldMerlin
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AlternateEmail
 import androidx.compose.material.icons.filled.Key
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -50,12 +50,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.merlinproject.R
 import com.example.merlinproject.common.Resource
-import com.example.merlinproject.ui.navigation.ScreensNavigation
+import com.example.merlinproject.ui.navigation.graph.AuthScreen
+import com.example.merlinproject.ui.navigation.graph.Graph
 import com.example.merlinproject.ui.theme.MerlinProjectIcons
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.cancelFilled
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.navigateToBack
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.visibilityFilled
 import com.example.merlinproject.ui.theme.MerlinProjectIcons.visibilityOffFilled
+import com.example.merlinproject.ui.theme.lexendFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -67,9 +69,15 @@ fun LoginScreen(
         modifier = modifier,
         topBar = {
             TopAppBar(
-                title = { Text(text = stringResource(id = R.string.login_screen_title)) },
+                title = {
+                    Text(
+                        text = stringResource(id = R.string.login_screen_title),
+                        fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Bold
+                    )
+                },
                 navigationIcon = {
-                    IconButton(onClick = { navHostController.navigate(ScreensNavigation.WelcomeScreen.route) }) {
+                    IconButton(onClick = { navHostController.navigate(AuthScreen.WelcomeScreen.route) }) {
                         Icon(imageVector = navigateToBack, contentDescription = "Navigate To Back")
                     }
                 },
@@ -104,7 +112,7 @@ fun ScreenContent(
         //Email
         TextFieldMerlin(
             modifier = Modifier
-                .width(280.dp)
+                .padding(16.dp)
                 .constrainAs(textFieldEmailAndPassword) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -120,9 +128,17 @@ fun ScreenContent(
                     } else {
                         mViewModel.emailErrMsg.value
                     }
-                    Text(text = message)
+                    Text(
+                        text = message,
+                        fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Light
+                    )
                 } else {
-                    Text(text = stringResource(id = R.string.login_screen_email_text_field_msg))
+                    Text(
+                        text = stringResource(id = R.string.login_screen_email_text_field_msg),
+                        fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Light
+                    )
                 }
             },
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email),
@@ -147,8 +163,8 @@ fun ScreenContent(
         //Password
         TextFieldMerlin(
             modifier = Modifier
-                .width(280.dp)
-                .padding(top = 32.dp)
+                .fillMaxWidth()
+                .padding(16.dp)
                 .constrainAs(textFieldPassword) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -184,9 +200,16 @@ fun ScreenContent(
                     } else {
                         mViewModel.passwordErrMsg.value
                     }
-                    Text(text = message)
+                    Text(
+                        text = message, fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Light
+                    )
                 } else {
-                    Text(text = stringResource(id = R.string.login_screen_password_text_field_label))
+                    Text(
+                        text = stringResource(id = R.string.login_screen_password_text_field_label),
+                        fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Light
+                    )
                 }
             },
         )
@@ -207,11 +230,17 @@ fun ScreenContent(
                     top.linkTo(textFieldPassword.bottom)
                 }
         ) {
-            Text(text = stringResource(id = R.string.login_screen_title_button))
+            Text(
+                text = stringResource(id = R.string.login_screen_title_button),
+                fontFamily = lexendFontFamily,
+                fontWeight = FontWeight.SemiBold
+            )
         }
 
         Text(
             text = stringResource(id = R.string.login_screen_social_txt_ing),
+            fontFamily = lexendFontFamily,
+            fontWeight = FontWeight.Normal,
             style = MaterialTheme.typography.bodySmall,
             modifier = modifier.constrainAs(txtSocialNetwork) {
                 start.linkTo(parent.start)
@@ -242,12 +271,13 @@ fun ScreenContent(
             Text(
                 text = stringResource(id = R.string.login_screen_title_Google_button),
                 style = MaterialTheme.typography.bodyLarge,
-                fontWeight = FontWeight.Normal, color = MaterialTheme.colorScheme.onSurface
+                fontWeight = FontWeight.Normal,
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
 
         TextButton(
-            onClick = { navHostController.navigate(ScreensNavigation.RegisterScreen.route) },
+            onClick = { navHostController.navigate(AuthScreen.RegisterScreen.route) },
             modifier.constrainAs(btnTextRegister) {
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
@@ -255,13 +285,13 @@ fun ScreenContent(
             }) {
             Text(
                 text = stringResource(id = R.string.login_screen_title_text_button),
+                fontFamily = lexendFontFamily,
+                fontWeight = FontWeight.SemiBold,
                 color = Color.Black,
                 fontStyle = FontStyle.Normal,
                 textDecoration = TextDecoration.Underline
             )
         }
-
-
     }
     mViewModel.loginFlow.collectAsState().value?.let { resourceState ->
         when (resourceState) {
@@ -276,18 +306,20 @@ fun ScreenContent(
 
             is Resource.Success -> {
                 LaunchedEffect(Unit) {
-                    navHostController.navigate(ScreensNavigation.BachelorsScreen.route) {
+                    navHostController.popBackStack()
+                    navHostController.navigate(route = Graph.HOME) {
                         //Eliminar el screen anterior
-                        popUpTo(ScreensNavigation.LoginScreen.route) { inclusive = true }
+                        popUpTo(Graph.AUTH) { inclusive = true }
                         // TODO: hacer lo mismo pero en la pantalla del registro.
                     }
                 }
             }
 
             is Resource.Failure -> {
-                // TODO: con este vamos a probar la peticion a firebase
+                Toast.makeText(LocalContext.current, resourceState.toString(), Toast.LENGTH_SHORT)
+                    .show()
+                Log.d("FirebaseResponse", "${resourceState}")
             }
         }
     }
 }
-

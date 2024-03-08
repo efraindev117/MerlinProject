@@ -1,3 +1,4 @@
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -12,14 +13,16 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.merlinproject.ui.theme.lexendFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextFieldMerlin(
-    modifier: Modifier = Modifier.width(290.dp),
+    modifier: Modifier = Modifier,
     value: String,
     singleLine: Boolean = true,
     supportingText: (@Composable () -> Unit),
@@ -34,7 +37,7 @@ fun TextFieldMerlin(
 
     ) {
     TextField(
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         value = value,
         maxLines = maxLines,
         singleLine = singleLine,
@@ -43,7 +46,10 @@ fun TextFieldMerlin(
             onValueChange(it)
             validateField()
         },
-        label = { Text(text = label) },
+        label = {
+            Text(text = label,
+                fontFamily = lexendFontFamily,
+                fontWeight = FontWeight.Normal) },
         keyboardOptions = keyboardOptions,
         visualTransformation = visualTransformation,
         leadingIcon = { Icon(imageVector = leadingIcon, contentDescription = null) },
