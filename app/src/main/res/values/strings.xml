@@ -47,7 +47,22 @@
     <string name="bachelors_card_msg">La información mostrada es obtenida de www.uacm.edu.mx</string>
     <string name="title_home_navigation">Home\n\t</string>
 
-
+    <!-- Campus screen -->
+    <string name="email_button_text">Correo</string>
+    <string name="phone_button_text">Llamar</string>
+    <string name="contact_text">Contacto</string>
+    <string name="card_title_more_services">Servicios Adicionales</string>
     <string name="card_addres_demo">Fray Servando Teresa de Mier 92 y 99 Col. Obrera, Alcaldía Cuauhtémoc06080 Ciudad de México México</string>
+
+
+    <!-- Heelp screen -->
+    <string name="title_help">Contacto con el desarrollador</string>
+    <string name="body_help">¿Tienes preguntas, quejas o propuestas? Envíame un WhatsApp o correo electrónico.</string>
+    <string name="email_button_text_help">Email</string>
+    <string name="chat_button_text_help">Chat</string>
+
+    <!-- teachers screen -->
+    <string name="title_teacher">¡Sin profesores!</string>
+    <string name="body_teacher">No podemos mostrar datos de profesores hasta llegar a un acuerdo con la UACM. Pero puedes agregarlos</string>
 
 </resources>

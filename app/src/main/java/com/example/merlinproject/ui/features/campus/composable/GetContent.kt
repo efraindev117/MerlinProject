@@ -1,5 +1,6 @@
 package com.example.merlinproject.ui.features.campus.composable
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -27,23 +28,22 @@ fun GetContent(
             .fillMaxWidth()
     ) {
         items(items = campus, key = { campus -> campus.lazyId }) { campus ->
-            val cameraPosition = rememberCameraPositionState {
-                position = CameraPosition.fromLatLngZoom(LatLng(campus.lat, campus.lng), 15f)
-            }
             CardCampusItem(
                 campusName = campus.campusName,
                 campusBody = campus.campusAddress,
                 phoneCampus = campus.campusPhone,
-                positionMaps = LatLng(campus.lat, campus.lng),
-                cameraPosition = cameraPosition,
                 goToDetails = {
                     val campusPar = CampusUniversityModel(
                         campusName = campus.campusName,
                         lat = campus.lat,
                         lng = campus.lng,
                         campusAddress = campus.campusAddress,
-                        campusPhone = campus.campusPhone
+                        campusPhone = campus.campusPhone,
+                        campusEmail = campus.campusEmail,
+                        campusServices = campus.campusServices
+
                     )
+                    Log.d("campusServices", campus.campusServices.toString())
                     navController.currentBackStackEntry?.savedStateHandle?.set(
                         key = "campus",
                         value = campusPar

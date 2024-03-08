@@ -1,13 +1,16 @@
 package com.example.merlinproject.ui.theme
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Cancel
+import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.ChecklistRtl
 import androidx.compose.material.icons.filled.ContactSupport
+import androidx.compose.material.icons.filled.DirectionsCar
 import androidx.compose.material.icons.filled.DomainAdd
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.EmojiEvents
@@ -15,20 +18,26 @@ import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Festival
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Key
 import androidx.compose.material.icons.filled.LabelImportant
+import androidx.compose.material.icons.filled.LocalLibrary
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Mail
 import androidx.compose.material.icons.filled.Map
+import androidx.compose.material.icons.filled.MedicalServices
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.PinDrop
 import androidx.compose.material.icons.filled.Policy
+import androidx.compose.material.icons.filled.Restaurant
 import androidx.compose.material.icons.filled.School
+import androidx.compose.material.icons.filled.Science
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.material.icons.outlined.Book
 import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.material.icons.outlined.Cancel
@@ -98,4 +107,14 @@ object MerlinProjectIcons {
     val EmailCampusIcon = Icons.Default.Email
     val ExpandMoreCampusIcon = Icons.Default.ExpandMore
     val ExpandLessCampusIcon = Icons.Default.ExpandLess
+    val RestaurantCampusIcon = Icons.Default.Restaurant
+    val BooksCampusIcon = Icons.Default.LocalLibrary
+    val FestivalCampusIcon = Icons.Default.Festival
+    val CarCampusIcon = Icons.Default.DirectionsCar
+    val LabCampusIcon = Icons.Default.Science
+    val MedicalCampusIcon = Icons.Default.MedicalServices
+    val WifiCampusIcon = Icons.Default.Wifi
+    val MessageCampusIcon = Icons.Default.Chat
+    val AddCampusIcon = Icons.Default.Add
+
 }

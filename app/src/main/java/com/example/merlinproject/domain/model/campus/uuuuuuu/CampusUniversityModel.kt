@@ -14,6 +14,8 @@ data class CampusUniversityModel(
     val campusAddress: String = "",
     val campusPhone: String = "",
     val campusPhoneExt: String = "",
+    val campusEmail: String = "",
     val lat: Double = 0.0,
-    val lng: Double = 0.0
+    val lng: Double = 0.0,
+    val campusServices: List<String> = emptyList()
 ) : Parcelable

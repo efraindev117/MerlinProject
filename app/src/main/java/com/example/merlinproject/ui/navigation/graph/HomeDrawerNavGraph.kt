@@ -52,7 +52,7 @@ fun HomeDrawerNavGraph(
         }
 
         composable(route = HomeDrawerScreen.TeachersScreen.route) {
-            TeachersScreen(navController = navHostController)
+            TeachersScreen(navController = navHostController, paddingValues = paddingValues)
         }
 
         composable(route = HomeDrawerScreen.CampusScreen.route) {
@@ -60,7 +60,7 @@ fun HomeDrawerNavGraph(
         }
 
         composable(route = HomeDrawerScreen.HelperScreen.route) {
-            HelperScreen(navController = navHostController)
+            HelperScreen(navController = navHostController, paddingValues = paddingValues)
         }
 
         composable(route = HomeDrawerScreen.ConfigScreen.route) {

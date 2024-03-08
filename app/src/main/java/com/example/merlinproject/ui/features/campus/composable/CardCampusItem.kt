@@ -40,18 +40,8 @@ fun CardCampusItem(
     campusName: String,
     campusBody: String,
     phoneCampus: String,
-    positionMaps: LatLng,
-    cameraPosition: CameraPositionState,
     goToDetails: () -> Unit
 ) {
-    var uiSettings by remember { mutableStateOf(MapUiSettings(
-        zoomControlsEnabled = false,
-        zoomGesturesEnabled = false,
-        mapToolbarEnabled = false,
-        scrollGesturesEnabled = false,
-        scrollGesturesEnabledDuringRotateOrZoom = false,
-        tiltGesturesEnabled = false
-    )) }
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -86,20 +76,6 @@ fun CardCampusItem(
                         fontWeight = FontWeight.Light,
                     )
                     Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.width_min_material)))
-
-                    GoogleMap(
-                        modifier
-                            .size(dimensionResource(id = R.dimen.map_size_circle))
-                            .clip(CircleShape),
-                        uiSettings = uiSettings,
-                        cameraPositionState = cameraPosition
-
-                    ) {
-                        Marker(
-                            state = MarkerState(position = positionMaps),
-                            title = campusName
-                        )
-                    }
                 }
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
