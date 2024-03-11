@@ -15,8 +15,8 @@ android {
         applicationId "com.example.merlinproject"
         minSdk 26
         targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -95,6 +95,7 @@ dependencies {
     //dagger hilt
     implementation "com.google.dagger:hilt-android:2.44"
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+    implementation 'androidx.compose.material3:material3-android:1.2.1'
     kapt "com.google.dagger:hilt-compiler:2.44"
     //hilt viewmodel
     //navigation

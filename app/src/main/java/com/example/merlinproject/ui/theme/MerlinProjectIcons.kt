@@ -11,7 +11,6 @@ import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.ChecklistRtl
 import androidx.compose.material.icons.filled.ContactSupport
 import androidx.compose.material.icons.filled.DirectionsCar
-import androidx.compose.material.icons.filled.DomainAdd
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.Error
@@ -21,7 +20,6 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Festival
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Key
-import androidx.compose.material.icons.filled.LabelImportant
 import androidx.compose.material.icons.filled.LocalLibrary
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Mail
@@ -29,7 +27,6 @@ import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.MedicalServices
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
-import androidx.compose.material.icons.filled.PinDrop
 import androidx.compose.material.icons.filled.Policy
 import androidx.compose.material.icons.filled.Restaurant
 import androidx.compose.material.icons.filled.School
@@ -42,15 +39,21 @@ import androidx.compose.material.icons.outlined.Book
 import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.material.icons.outlined.Cancel
 import androidx.compose.material.icons.outlined.ChecklistRtl
+import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.ContactSupport
+import androidx.compose.material.icons.outlined.Diversity1
 import androidx.compose.material.icons.outlined.DomainAdd
 import androidx.compose.material.icons.outlined.EmojiEvents
 import androidx.compose.material.icons.outlined.Face
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.GTranslate
+import androidx.compose.material.icons.outlined.Group
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Key
-import androidx.compose.material.icons.outlined.LabelImportant
 import androidx.compose.material.icons.outlined.Mail
+import androidx.compose.material.icons.outlined.Notifications
+import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Policy
 import androidx.compose.material.icons.outlined.School
@@ -116,5 +119,16 @@ object MerlinProjectIcons {
     val WifiCampusIcon = Icons.Default.Wifi
     val MessageCampusIcon = Icons.Default.Chat
     val AddCampusIcon = Icons.Default.Add
+
+    //Menu settigns icons
+    val UserSettingsIcon = Icons.Outlined.Person
+    val NotificationsSettingsIcon = Icons.Outlined.Notifications
+    val ThemeSettingsIcon = Icons.Outlined.Palette
+    val LanguageSettingsIcon = Icons.Outlined.GTranslate
+    val RateSettingsIcon = Icons.Outlined.FavoriteBorder
+    val GroupSettingsIcon = Icons.Outlined.Group
+    val DiversitySettingsIcon = Icons.Outlined.Diversity1
+    val TechSettingsIcon = Icons.Outlined.Code
+    val InfoSettingsIcon = Icons.Outlined.Info
 
 }

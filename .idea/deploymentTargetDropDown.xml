@@ -2,22 +2,22 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="ConfigPrev">
+        <State />
+      </entry>
+      <entry key="ConfigPrev (1)">
+        <State />
+      </entry>
       <entry key="HelpPrev">
         <State />
       </entry>
-      <entry key="PRev">
+      <entry key="PrevModal">
         <State />
       </entry>
       <entry key="PreviewTeacher">
         <State />
       </entry>
-      <entry key="Previews">
-        <State />
-      </entry>
       <entry key="app">
-        <State />
-      </entry>
-      <entry key="prevButton">
         <State />
       </entry>
     </value>

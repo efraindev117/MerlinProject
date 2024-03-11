@@ -57,7 +57,8 @@ fun TextFieldMerlin(
             trailingIcon()
         },
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            textColor = Color.Gray,
+
+            //textColor = Color.Gray,
             focusedBorderColor = Color.Black,
             unfocusedBorderColor = Color.LightGray,
             unfocusedLeadingIconColor = Color.Black,

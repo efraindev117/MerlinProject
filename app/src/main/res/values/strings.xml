@@ -7,6 +7,20 @@
 
     <!-- icons default -->
     <string name="icons_default_description">Icono sin acción en la ui</string>
+    <!-- dialog app -->
+    <string name="dialog_button_title">Entendido</string>
+    <string name="dialog_diversity_title">Entendido</string>
+    <string name="dialog_diversity_body">En Daily UACM Valoramos y respetamos a cada individuo, sin importar su origen, identidad de género, orientación sexual o creencias</string>
+
+    <!-- modalsheetButton app -->
+    <string name="modal_title">Acerca de</string>
+    <string name="modal_app_name">Daily Uacm</string>
+    <string name="modal_app_body">La agenda escolar para estudiantes de la UACM. Administra tus calificaciones, créditos, agrega notas, y contacta con planteles, etc. Con facilidad.</string>
+    <string name="modal_developer_title">Desarrollador por </string>
+    <string name="modal_developer_name">Efraín Arreola Martínez</string>
+    <string name="modal_bug_report">Reporte de fallos y solicitud de nuevas funciones.</string>
+    <string name="modal_developer_mail">efrain_dev@outlook.com</string>
+
 
 
     <!-- login screen -->
@@ -63,6 +77,8 @@
 
     <!-- teachers screen -->
     <string name="title_teacher">¡Sin profesores!</string>
+    <string name="title_fab_add_teacher">Agregar</string>
     <string name="body_teacher">No podemos mostrar datos de profesores hasta llegar a un acuerdo con la UACM. Pero puedes agregarlos</string>
+
 
 </resources>

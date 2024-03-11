@@ -1,7 +1,6 @@
 package com.example.merlinproject.ui.navigation.composable
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -16,7 +15,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -30,7 +28,7 @@ fun BottomNavigationBar(
 ) {
     var selectedItemIndex by remember { mutableStateOf(0) }
     val navController = rememberNavController()
-    val bottomNavigationItems = remember { NavigationItems().bottomNavigationItems() }
+    val bottomNavigationItems = remember { MenuItems().bottomNavigationItems() }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route ?: ""
     Scaffold(
@@ -43,7 +41,7 @@ fun BottomNavigationBar(
         },
         bottomBar = {
             NavigationBar {
-                NavigationItems().bottomNavigationItems()
+                MenuItems().bottomNavigationItems()
                     .forEachIndexed { index, navigationItem ->
                         NavigationBarItem(
                             selected = index == selectedItemIndex,

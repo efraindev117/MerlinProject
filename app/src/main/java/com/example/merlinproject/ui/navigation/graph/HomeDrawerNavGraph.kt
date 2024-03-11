@@ -64,7 +64,7 @@ fun HomeDrawerNavGraph(
         }
 
         composable(route = HomeDrawerScreen.ConfigScreen.route) {
-            ConfigScreen(navController = navHostController)
+            ConfigScreen(navController = navHostController,paddingValues = paddingValues)
         }
 
         detailsNavGraph(navHostController)
