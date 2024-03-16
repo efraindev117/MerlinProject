@@ -37,7 +37,7 @@ fun ModalSheetDesign(
 ) {
     val modalBottomSheetState = rememberModalBottomSheetState()
     val context = LocalContext.current
-    val versionCode =
+    @Suppress("DEPRECATION") val versionCode =
         context.packageManager.getPackageInfo(context.packageName, 0).versionCode
     val versionName =
         context.packageManager.getPackageInfo(context.packageName, 0).versionName

@@ -29,7 +29,7 @@ fun HomeDrawerNavGraph(
         startDestination = HomeDrawerScreen.ResumeScreen.route
     ) {
         composable(route = HomeDrawerScreen.ResumeScreen.route) {
-            ResumeScreen(navController = navHostController)
+            ResumeScreen(navController = navHostController,paddingValues = paddingValues)
         }
 
         composable(route = HomeDrawerScreen.NotesScreen.route) {

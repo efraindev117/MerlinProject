@@ -68,7 +68,7 @@ fun ConfigScreen(
                 showDialog = false
                 println("Confirmation registered") // Aquí puedes agregar la lógica para manejar la confirmación
             },
-            dialogTitle = stringResource(id = R.string.dialog_button_title),
+            dialogTitle = stringResource(id = R.string.dialog_diversity_title),
             dialogText = stringResource(id = R.string.dialog_diversity_body),
             icon = MerlinProjectIcons.DiversitySettingsIcon
         )
@@ -80,7 +80,6 @@ fun ConfigScreen(
             .fillMaxSize()
     ) {
         val menuSettingsColumn = createRef()
-        val guidelineTop = createGuidelineFromTop(.1f)
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -94,7 +93,7 @@ fun ConfigScreen(
                     title = menu.title ?: "",
                     icon = menu.selectedIcon,
                     onclick = {
-                        if (index == 3) {
+                        if (index == 2) {
                             showDialog = true
                         }
                         if (index == 8) {

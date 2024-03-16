@@ -7,9 +7,10 @@
 
     <!-- icons default -->
     <string name="icons_default_description">Icono sin acción en la ui</string>
+    <string name="img_profile">Imagen traiga de Google</string>
     <!-- dialog app -->
     <string name="dialog_button_title">Entendido</string>
-    <string name="dialog_diversity_title">Entendido</string>
+    <string name="dialog_diversity_title">Diversidad</string>
     <string name="dialog_diversity_body">En Daily UACM Valoramos y respetamos a cada individuo, sin importar su origen, identidad de género, orientación sexual o creencias</string>
 
     <!-- modalsheetButton app -->
