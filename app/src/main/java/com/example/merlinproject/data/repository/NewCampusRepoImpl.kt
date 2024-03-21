@@ -2,7 +2,7 @@ package com.example.merlinproject.data.repository
 
 import com.example.merlinproject.common.Resource
 import com.example.merlinproject.data.di.NewCampusCollection
-import com.example.merlinproject.domain.model.campus.uuuuuuu.CampusUniversityModel
+import com.example.merlinproject.domain.model.campus.CampusUniversityModel
 import com.example.merlinproject.domain.repository.INewCampusRepository
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.channels.awaitClose

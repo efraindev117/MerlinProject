@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.merlinproject.common.Resource
-import com.example.merlinproject.domain.model.campus.uuuuuuu.CampusUniversityModel
+import com.example.merlinproject.domain.model.campus.CampusUniversityModel
 import com.example.merlinproject.domain.usescase.NewCampusUsesCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

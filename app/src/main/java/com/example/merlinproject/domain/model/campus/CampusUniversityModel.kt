@@ -1,4 +1,4 @@
-package com.example.merlinproject.domain.model.campus.uuuuuuu
+package com.example.merlinproject.domain.model.campus
 
 import android.os.Parcelable
 import androidx.compose.runtime.Immutable
