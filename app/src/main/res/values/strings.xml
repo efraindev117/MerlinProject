@@ -2,6 +2,28 @@
     <string name="app_name">Merlin Project</string>
 
 
+    <string name="title_navigation_drawer">Daily Uacm</string>
+
+
+    <!-- icons default -->
+    <string name="icons_default_description">Icono sin acción en la ui</string>
+    <string name="img_profile">Imagen traiga de Google</string>
+    <!-- dialog app -->
+    <string name="dialog_button_title">Entendido</string>
+    <string name="dialog_diversity_title">Diversidad</string>
+    <string name="dialog_diversity_body">En Daily UACM Valoramos y respetamos a cada individuo, sin importar su origen, identidad de género, orientación sexual o creencias</string>
+
+    <!-- modalsheetButton app -->
+    <string name="modal_title">Acerca de</string>
+    <string name="modal_app_name">Daily Uacm</string>
+    <string name="modal_app_body">La agenda escolar para estudiantes de la UACM. Administra tus calificaciones, créditos, agrega notas, y contacta con planteles, etc. Con facilidad.</string>
+    <string name="modal_developer_title">Desarrollador por </string>
+    <string name="modal_developer_name">Efraín Arreola Martínez</string>
+    <string name="modal_bug_report">Reporte de fallos y solicitud de nuevas funciones.</string>
+    <string name="modal_developer_mail">efrain_dev@outlook.com</string>
+
+
+
     <!-- login screen -->
     <string name="login_screen_title">Iniciar sesión</string>
     <string name="login_screen_email_text_field_label">Email</string>
@@ -38,5 +60,26 @@
     <!-- Bachelors screen -->
     <string name="bachelors_screen_title">Bienvenido a Dayli UACM</string>
     <string name="bachelors_card_msg">La información mostrada es obtenida de www.uacm.edu.mx</string>
+    <string name="title_home_navigation">Home\n\t</string>
+
+    <!-- Campus screen -->
+    <string name="email_button_text">Correo</string>
+    <string name="phone_button_text">Llamar</string>
+    <string name="contact_text">Contacto</string>
+    <string name="card_title_more_services">Servicios Adicionales</string>
+    <string name="card_addres_demo">Fray Servando Teresa de Mier 92 y 99 Col. Obrera, Alcaldía Cuauhtémoc06080 Ciudad de México México</string>
+
+
+    <!-- Heelp screen -->
+    <string name="title_help">Contacto con el desarrollador</string>
+    <string name="body_help">¿Tienes preguntas, quejas o propuestas? Envíame un WhatsApp o correo electrónico.</string>
+    <string name="email_button_text_help">Email</string>
+    <string name="chat_button_text_help">Chat</string>
+
+    <!-- teachers screen -->
+    <string name="title_teacher">¡Sin profesores!</string>
+    <string name="title_fab_add_teacher">Agregar</string>
+    <string name="body_teacher">No podemos mostrar datos de profesores hasta llegar a un acuerdo con la UACM. Pero puedes agregarlos</string>
+
 
 </resources>

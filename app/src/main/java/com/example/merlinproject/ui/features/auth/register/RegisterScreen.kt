@@ -44,8 +44,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.merlinproject.R
 import com.example.merlinproject.common.Resource
-import com.example.merlinproject.ui.navigation.ScreensNavigation
+import com.example.merlinproject.ui.navigation.graph.AuthScreen
 import com.example.merlinproject.ui.theme.MerlinProjectIcons
+import com.example.merlinproject.ui.theme.lexendFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,9 +58,15 @@ fun RegisterScreen(
         modifier = modifier,
         topBar = {
             TopAppBar(
-                title = { Text(text = stringResource(id = R.string.register_screen_title)) },
+                title = {
+                    Text(
+                        text = stringResource(id = R.string.register_screen_title),
+                        fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Bold
+                    )
+                },
                 navigationIcon = {
-                    IconButton(onClick = { navHostController.navigate(ScreensNavigation.WelcomeScreen.route) }) {
+                    IconButton(onClick = { navHostController.navigate(AuthScreen.WelcomeScreen.route) }) {
                         Icon(
                             imageVector = MerlinProjectIcons.navigateToBack,
                             contentDescription = "Navigate To Back"
@@ -114,9 +121,17 @@ fun ScreenRegisterContent(
                     } else {
                         mViewModel.usernameMsgResult.value
                     }
-                    Text(text = message)
+                    Text(
+                        text = message,
+                        fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Light
+                    )
                 } else {
-                    Text(text = "Nombre de usuario")
+                    Text(
+                        text = "Nombre de usuario",
+                        fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Light
+                    )
                 }
             },
             label = stringResource(id = R.string.register_screen_username_text_field_label),
@@ -156,9 +171,17 @@ fun ScreenRegisterContent(
                     } else {
                         mViewModel.emailMsgResult.value
                     }
-                    Text(text = message)
+                    Text(
+                        text = message,
+                        fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Light
+                    )
                 } else {
-                    Text(text = "Correo electronico")
+                    Text(
+                        text = "Correo electronico",
+                        fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Light
+                    )
                 }
             },
             label = stringResource(id = R.string.register_screen_email_text_field_label),
@@ -199,9 +222,17 @@ fun ScreenRegisterContent(
                     } else {
                         mViewModel.passwordMsgResult.value
                     }
-                    Text(text = message)
+                    Text(
+                        text = message,
+                        fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Light
+                    )
                 } else {
-                    Text(text = "Contraseña")
+                    Text(
+                        text = "Contraseña",
+                        fontFamily = lexendFontFamily,
+                        fontWeight = FontWeight.Light
+                    )
                 }
             },
             label = stringResource(id = R.string.register_screen_password_text_field_label),
@@ -249,14 +280,20 @@ fun ScreenRegisterContent(
                     top.linkTo(textFieldPassword.bottom)
                 }
         ) {
-            Text(text = "Registrarme")
+            Text(
+                text = "Registrarme",
+                fontFamily = lexendFontFamily,
+                fontWeight = FontWeight.SemiBold
+            )
         }
 
 
         //Registro con redes sociales
         Text(
             text = "Registro con redes sociales",
-            style = MaterialTheme.typography.bodySmall,
+            fontFamily = lexendFontFamily,
+            fontWeight = FontWeight.Normal,
+
             modifier = modifier.constrainAs(txtSocialNetwork) {
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
@@ -304,10 +341,11 @@ fun ScreenRegisterContent(
             is Resource.Success -> {
                 LaunchedEffect(Unit) {
                     mViewModel.createUser()
-                    navHostController.popBackStack(ScreensNavigation.RegisterScreen.route,
+                    navHostController.popBackStack(
+                        AuthScreen.RegisterScreen.route,
                         true
                     )
-                    navHostController.navigate(ScreensNavigation.BachelorsScreen.route)
+                    // navHostController.navigate(AuthScreen.BachelorsScreen.route)
                 }
             }
 
