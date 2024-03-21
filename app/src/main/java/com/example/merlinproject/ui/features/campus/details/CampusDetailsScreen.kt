@@ -21,7 +21,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
-import com.example.merlinproject.domain.model.campus.uuuuuuu.CampusUniversityModel
+import com.example.merlinproject.domain.model.campus.CampusUniversityModel
 import com.example.merlinproject.ui.theme.lexendFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -1,11 +1,8 @@
 package com.example.merlinproject.data.di
 
 import com.example.merlinproject.common.Constants.CAMPUS_COLLECTION
-import com.example.merlinproject.common.Constants.CAMPUS_FIREBASE
-import com.example.merlinproject.common.Constants.LIC_FIREBASE
 import com.example.merlinproject.common.Constants.USERS_FIREBASE
 import com.example.merlinproject.domain.repository.IFirebaseAuthRepository
-import com.example.merlinproject.domain.repository.IFirebaseCampusRepository
 import com.example.merlinproject.domain.repository.IFirebaseUserRepository
 import com.example.merlinproject.domain.repository.INewCampusRepository
 import com.example.merlinproject.domain.usescase.NewCampusUsesCase
@@ -15,17 +12,12 @@ import com.example.merlinproject.domain.usescase.auth.login.GetCurrentUser
 import com.example.merlinproject.domain.usescase.auth.login.Login
 import com.example.merlinproject.domain.usescase.auth.login.Logout
 import com.example.merlinproject.domain.usescase.auth.register.SignUp
-import com.example.merlinproject.domain.usescase.campus.CampusUsesCase
-import com.example.merlinproject.domain.usescase.campus.GetCampusByName
-import com.example.merlinproject.domain.usescase.campus.GetCampusDocument
-import com.example.merlinproject.domain.usescase.campus.GetOferta
 import com.example.merlinproject.domain.usescase.users.CreateUser
 import com.example.merlinproject.domain.usescase.users.GetUserById
 import com.example.merlinproject.domain.usescase.users.UsersUsesCase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.Module
@@ -37,14 +29,6 @@ import javax.inject.Qualifier
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class UsersCollection
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class PlantelCollection
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class LicenciaturaCollection
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
@@ -69,19 +53,9 @@ object AppModule {
             CollectionReference = db.collection(USERS_FIREBASE)
 
     @Provides
-    @PlantelCollection
-    fun providePlantelCollection(db: FirebaseFirestore):
-            CollectionReference = db.collection(CAMPUS_FIREBASE)
-
-    @Provides
     @NewCampusCollection
     fun provideNewCampusCollection(db: FirebaseFirestore):
             CollectionReference = db.collection(CAMPUS_COLLECTION)
-
-    @Provides
-    @LicenciaturaCollection
-    fun provideLicenciaturaCollection(db: FirebaseFirestore):
-            Query = db.collection(LIC_FIREBASE).whereEqualTo("campus", "alfa")
 
     //uses case
     @Provides
@@ -96,13 +70,6 @@ object AppModule {
     fun provideUsersUsesCase(repository: IFirebaseUserRepository) = UsersUsesCase(
         createUser = CreateUser(repository),
         getUserById = GetUserById(repository)
-    )
-
-    @Provides
-    fun provideCampusUsesCase(repository: IFirebaseCampusRepository) = CampusUsesCase(
-        getCampusByName = GetCampusByName(repository),
-        getOferta = GetOferta(repository),
-        getDocument = GetCampusDocument(repository)
     )
 
     @Provides
