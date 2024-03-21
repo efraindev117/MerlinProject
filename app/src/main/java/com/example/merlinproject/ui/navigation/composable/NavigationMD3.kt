@@ -32,16 +32,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 import com.example.merlinproject.R
-import com.example.merlinproject.ui.features.home.HomeScreen
-import com.example.merlinproject.ui.features.resume.ResumeScreen
 import com.example.merlinproject.ui.navigation.graph.HomeDrawerNavGraph
-import com.example.merlinproject.ui.navigation.graph.HomeDrawerScreen
 import com.example.merlinproject.ui.theme.lexendFontFamily
 import com.example.merlinproject.ui.utils.MerlinIcons.MenuIconMD3
 import kotlinx.coroutines.launch
@@ -53,7 +48,7 @@ fun NavigationMD3(navController: NavHostController) {
         modifier = Modifier,
         color = MaterialTheme.colorScheme.background
     ) {
-        val bottomNavigationItems = remember { NavigationItems().bottomNavigationItems() }
+        val bottomNavigationItems = remember { MenuItems().bottomNavigationItems() }
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route ?: ""
         val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -74,7 +69,7 @@ fun NavigationMD3(navController: NavHostController) {
                         modifier = Modifier.fillMaxWidth()
                     )
                     Spacer(modifier = Modifier.height(16.dp))
-                    NavigationItems().bottomNavigationItems()
+                    MenuItems().bottomNavigationItems()
                         .forEachIndexed { index, items ->
                             NavigationDrawerItem(
                                 label = {

@@ -28,7 +28,7 @@ fun CardShimmerEffect() {
         initialValue = 0f,
         targetValue = 1f,
         animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 1000),
+            animation = tween(durationMillis = 600),
             repeatMode = RepeatMode.Reverse
         ), label = ""
     ).value
