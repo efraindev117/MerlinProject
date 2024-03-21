@@ -14,8 +14,8 @@ android {
         applicationId = "com.example.merlinproject"
         minSdk = 26
         targetSdk = 34
-        versionCode =  2
-        versionName  = "1.1.1"
+        versionCode = 2
+        versionName = "1.1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -34,7 +34,7 @@ android {
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility  = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
         jvmTarget = "17"
@@ -53,57 +53,52 @@ android {
 }
 
 dependencies {
-    implementation("io.coil-kt:coil-compose:1.3.2")
+    implementation(libs.coil.compose)
 
     // Maps
-    implementation("com.google.maps.android:maps-compose:2.11.4")
-    implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation(libs.maps.compose)
+    implementation(libs.play.services.maps)
 
     // To use constraintlayout in compose
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha13")
+    implementation(libs.constraintlayout.compose)
 
     // Icons
-    implementation("androidx.compose.material:material-icons-extended:1.5.3")
+    implementation(libs.material.icons.extended)
 
     // Window Size
     implementation("androidx.compose.material3:material3-window-size-class")
 
     // Firebase
-    implementation("com.google.firebase:firebase-auth-ktx:21.1.0")
-    implementation("com.google.android.gms:play-services-auth:20.4.1")
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.play.services.auth)
     implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
-    implementation("com.google.firebase:firebase-firestore:24.9.1")
+    implementation(libs.firebase.firestore)
 
     // Kotlin Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
 
     // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha01")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.0-alpha01")
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.livedata.ktx)
 
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-
+    implementation(libs.retrofit)
     // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-    kapt("com.google.dagger:hilt-compiler:2.44")
-
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    kapt(libs.dagger.hilt.compiler)
     // Hilt ViewModel
-    implementation("androidx.navigation:navigation-compose:2.5.1")
-
+    implementation(libs.navigation.compose)
     // ViewModels
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
-
-    implementation("io.coil-kt:coil-compose:2.1.0")
-
+    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.lifecycle.viewmodel.savedstate)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx.v251)
+    implementation(libs.coil.compose.v210)
     // Core KTX
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.activity:activity-compose:1.8.0")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
@@ -111,12 +106,12 @@ dependencies {
     implementation("androidx.compose.material3:material3")
 
     // Testing dependencies
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     //material 3
-    implementation("androidx.compose.material3:material3-android:1.2.1")
+    implementation(libs.androidx.material3.android)
 }
 kapt {
     correctErrorTypes = true

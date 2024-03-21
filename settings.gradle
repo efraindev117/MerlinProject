@@ -15,3 +15,18 @@ dependencyResolutionManagement {
 
 rootProject.name = "Merlin Project"
 include ':app'
+include ':core:common'
+include ':core:data'
+include ':core:designsystem'
+include ':core:model'
+include ':core:firebase'
+include ':feature:resume'
+include ':feature:notes'
+include ':feature:campus'
+include ':feature:help'
+include ':feature:teachers'
+include ':feature:config'
+include ':feature:acount'
+include ':feature:about'
+include ':feature:diversity'
+include ':core:domain'

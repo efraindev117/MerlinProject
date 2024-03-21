@@ -5,11 +5,28 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
+        <option name="gradleJvm" value="17" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/common" />
+            <option value="$PROJECT_DIR$/core/data" />
+            <option value="$PROJECT_DIR$/core/designsystem" />
+            <option value="$PROJECT_DIR$/core/domain" />
+            <option value="$PROJECT_DIR$/core/firebase" />
+            <option value="$PROJECT_DIR$/core/model" />
+            <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/about" />
+            <option value="$PROJECT_DIR$/feature/acount" />
+            <option value="$PROJECT_DIR$/feature/campus" />
+            <option value="$PROJECT_DIR$/feature/config" />
+            <option value="$PROJECT_DIR$/feature/diversity" />
+            <option value="$PROJECT_DIR$/feature/help" />
+            <option value="$PROJECT_DIR$/feature/notes" />
+            <option value="$PROJECT_DIR$/feature/resume" />
+            <option value="$PROJECT_DIR$/feature/teachers" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
