@@ -1,7 +1,7 @@
 package com.example.merlinproject.domain.repository
 
 import com.example.merlinproject.common.Resource
-import com.example.merlinproject.domain.model.UserModel
+import com.example.merlinproject.domain.model.user.UserModel
 import com.google.firebase.auth.FirebaseUser
 
 interface IFirebaseAuthRepository {

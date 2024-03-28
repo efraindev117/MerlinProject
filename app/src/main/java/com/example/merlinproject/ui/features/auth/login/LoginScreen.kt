@@ -1,7 +1,6 @@
 package com.example.merlinproject.ui.features.auth.login
 
 import TextFieldMerlin
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -308,17 +307,15 @@ fun ScreenContent(
                 LaunchedEffect(Unit) {
                     navHostController.popBackStack()
                     navHostController.navigate(route = Graph.HOME) {
+                        //Graph.HOME
                         //Eliminar el screen anterior
                         popUpTo(Graph.AUTH) { inclusive = true }
-                        // TODO: hacer lo mismo pero en la pantalla del registro.
                     }
                 }
             }
-
             is Resource.Failure -> {
                 Toast.makeText(LocalContext.current, resourceState.toString(), Toast.LENGTH_SHORT)
                     .show()
-                Log.d("FirebaseResponse", "${resourceState}")
             }
         }
     }

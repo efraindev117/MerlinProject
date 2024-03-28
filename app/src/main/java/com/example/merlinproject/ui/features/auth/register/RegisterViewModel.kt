@@ -5,9 +5,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.merlinproject.common.Constants.USERS_FIREBASE
 import com.example.merlinproject.common.Resource
-import com.example.merlinproject.domain.model.UserModel
+import com.example.merlinproject.domain.model.user.UserModel
 import com.example.merlinproject.domain.usescase.auth.login.AuthUsesCase
 import com.example.merlinproject.domain.usescase.users.UsersUsesCase
 import com.google.firebase.auth.FirebaseUser
@@ -16,7 +15,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.inject.Named
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(

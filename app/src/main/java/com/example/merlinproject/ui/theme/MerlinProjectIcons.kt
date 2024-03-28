@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.Festival
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Key
 import androidx.compose.material.icons.filled.LocalLibrary
+import androidx.compose.material.icons.filled.LocationCity
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Mail
 import androidx.compose.material.icons.filled.Map
@@ -51,6 +52,7 @@ import androidx.compose.material.icons.outlined.Group
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Key
+import androidx.compose.material.icons.outlined.LocationCity
 import androidx.compose.material.icons.outlined.Mail
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Palette
@@ -65,6 +67,8 @@ object MerlinProjectIcons {
     val emailOutlined = Icons.Outlined.Mail
     val passwordFilled = Icons.Filled.Key
     val passwordOutlined = Icons.Outlined.Key
+    val schooldOutlined = Icons.Default.School
+    val planteldOutlined = Icons.Default.LocationCity
     val cancelFilled = Icons.Filled.Cancel
     val visibilityFilled = Icons.Filled.Visibility
     val visibilityOffFilled = Icons.Filled.VisibilityOff

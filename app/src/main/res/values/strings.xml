@@ -48,6 +48,8 @@
     <string name="register_screen_email_text_field_error_msg">Correo no válido</string>
     <string name="register_screen_email_text_field_success_msg">Correo válido</string>
     <string name="register_screen_password_text_field_label">Contraseña</string>
+    <string name="register_screen_campus_text_field_label">Plantel de inscripción</string>
+    <string name="register_screen_lic_text_field_label">Licenciatura</string>
     <string name="register_screen_password_text_field_msg">Debe ser mayor a 6 carácteres</string>
     <string name="register_screen_password_text_field_error_msg">La contraseña es muy corta</string>
     <string name="register_screen_password_text_field_success_msg">Contraseña válida</string>

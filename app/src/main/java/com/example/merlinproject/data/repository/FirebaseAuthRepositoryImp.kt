@@ -1,11 +1,10 @@
 package com.example.merlinproject.data.repository
 
 import com.example.merlinproject.common.Resource
-import com.example.merlinproject.domain.model.UserModel
+import com.example.merlinproject.domain.model.user.UserModel
 import com.example.merlinproject.domain.repository.IFirebaseAuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 

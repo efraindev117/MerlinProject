@@ -1,4 +1,4 @@
-package com.example.merlinproject.ui.features.profile
+package com.example.merlinproject.ui.features.resume
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(
+class ResumeViewModel @Inject constructor(
     private val authUsesCase: AuthUsesCase,
     private val usersUsesCase: UsersUsesCase
 ) : ViewModel() {
@@ -21,23 +21,16 @@ class ProfileViewModel @Inject constructor(
     var userData by mutableStateOf(UserModel())
         private set
 
+
     private fun getUserById() = viewModelScope.launch {
-        usersUsesCase.getUserById(authUsesCase.getCurrentUser()!!.uid).collect(){ firebasedata ->
-            userData = firebasedata
+        usersUsesCase.getUserById(authUsesCase.getCurrentUser()!!.uid).collect() { userFirebase ->
+            userData = userFirebase
         }
     }
 
 
+
     init {
-        //Inicia la funcion que trae la información en tiempo real
         getUserById()
     }
-
-
-    fun logout() {
-        authUsesCase.logout()
-        // TODO: Modificar la vista de ProfileScreen e implementar el button con esta accion
-    }
-
-
 }

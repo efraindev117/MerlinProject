@@ -2,7 +2,7 @@ package com.example.merlinproject.data.repository
 
 import com.example.merlinproject.common.Resource
 import com.example.merlinproject.data.di.UsersCollection
-import com.example.merlinproject.domain.model.UserModel
+import com.example.merlinproject.domain.model.user.UserModel
 import com.example.merlinproject.domain.repository.IFirebaseUserRepository
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.channels.awaitClose
@@ -19,6 +19,20 @@ class FirebaseUserRepositoryImpl @Inject constructor(
         return try {
             user.password = ""
             usersRef.document(user.id).set(user).await()
+            Resource.Success(true)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Resource.Failure(e)
+        }
+    }
+
+    override suspend fun update(user: UserModel): Resource<Boolean> {
+        return try {
+            user.password = ""
+            val map: MutableMap<String,Any> = HashMap()
+            map["username"] = user.username
+            map["profileImg"] = user.profileImg
+            usersRef.document(user.id).update(map).await()
             Resource.Success(true)
         } catch (e: Exception) {
             e.printStackTrace()

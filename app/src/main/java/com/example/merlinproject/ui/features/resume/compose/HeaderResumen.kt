@@ -36,7 +36,9 @@ import com.example.merlinproject.R
 import com.example.merlinproject.ui.theme.lexendFontFamily
 
 @Composable
-fun HeaderHello(modifier: Modifier) {
+fun HeaderHello(
+    userName:String = "",
+    modifier: Modifier) {
     val infiniteTransition = rememberInfiniteTransition(label = "")
     val rotationAnimation = infiniteTransition.animateFloat(
         initialValue = 0f,
@@ -58,7 +60,7 @@ fun HeaderHello(modifier: Modifier) {
                 fontWeight = FontWeight.Light,
             )
         ) {
-            append("Efraín¡")
+            append("${userName}!")
         }
     }
     val blueGradientBrush = Brush.linearGradient(
@@ -79,16 +81,7 @@ fun HeaderHello(modifier: Modifier) {
         ) {
             Text(
                 text = helloNameTxt,
-                style = MaterialTheme.typography.titleLarge
-            )
-
-
-            Text(
-                text = "Buenas noches :)",
-                color = MaterialTheme.colorScheme.primary,
-                style = MaterialTheme.typography.titleMedium,
-                fontFamily = lexendFontFamily,
-                fontWeight = FontWeight.Medium,
+                style = MaterialTheme.typography.headlineMedium
             )
         }
 
@@ -102,7 +95,7 @@ fun HeaderHello(modifier: Modifier) {
                 .clip(CircleShape)
                 .height(50.dp)
                 .width(50.dp),
-            painter = painterResource(id = R.drawable.ic_launcher_background),
+            painter = painterResource(id = R.drawable.ic_launcher_foreground),
             contentDescription = ""
         )
     }
